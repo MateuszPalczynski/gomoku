@@ -1,0 +1,35 @@
+package fais.zti.oramus.gomoku;
+
+/**
+ * Budowniczy konfiguracji gry Gomoku.
+ */
+public class GomokuBuilder {
+    private int size = 15;
+    private Mark first = Mark.CROSS;
+    private boolean periodic = false;
+
+    public GomokuBuilder size(int size) {
+        if (size <= 0) {
+            throw new IllegalArgumentException("Size must be >=5");
+        }
+        this.size = size;
+        return this;
+    }
+
+    public GomokuBuilder firstMark(Mark first) {
+        if (first == null) {
+            throw new IllegalArgumentException("First mark cannot be null");
+        }
+        this.first = first;
+        return this;
+    }
+
+    public GomokuBuilder periodic() {
+        this.periodic = true;
+        return this;
+    }
+
+    public Gomoku build() {
+        return new Gomoku(size, first, periodic);
+    }
+}
