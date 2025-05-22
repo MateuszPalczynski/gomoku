@@ -12,6 +12,21 @@ public class Gomoku implements Game {
     private final BoardValidator validator;
     private final MoveSelector selector;
 
+    @Override
+    public void firstMark(Mark first) {
+        // stub: nieużywana w tej implementacji
+    }
+
+    @Override
+    public void size(int size) {
+        // stub: nieużywana w tej implementacji
+    }
+
+    @Override
+    public void periodicBoundaryConditionsInUse() {
+        // stub: nieużywana w tej implementacji
+    }
+
     /**
      * Konstruktor pakietowy używany przez GomokuBuilder.
      */
