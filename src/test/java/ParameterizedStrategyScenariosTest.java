@@ -62,37 +62,37 @@ class ParameterizedStrategyScenariosTest {
                         new Position(2, 1),
                         null,
                         null),
-/*
+
                 // 4. Podwójne zagrożenie (X jednocześnie tworzy dwa 4-w-rzędzie)
                 Arguments.of(new String[]{
-                                "..........",
-                                "..xx.x....",
-                                "..x.x.....",
-                                "..........",
+                                ".......o..",
+                                "..xxx.....",
+                                "..x.......",
+                                "..x.......",
                                 ".o........",
                                 "..........",
                                 "......o...",
                                 ".o....o...",
                                 "..........",
                                 ".........."
-                        }, Mark.CROSS,
-                        new Position(3, 1),
+                        }, Mark.NOUGHT,
                         null,
+                        ResignException.class,
                         null),
-    */
-                // 5. Rezygnacja (pełna plansza bez zwycięzcy)
+
+                // 5. Rezygnacja - dwie czwórki
                 Arguments.of(new String[]{
-                                "xxooxxooxx",
-                                "ooxxooxxoo",
-                                "xxooxxooxx",
-                                "ooxxooxxoo",
-                                "xxooxxooxx",
-                                "ooxxooxxoo",
-                                "xxooxxooxx",
-                                "ooxxooxxoo",
-                                "xxooxxooxx",
-                                "ooxxooxxoo"
-                        }, Mark.CROSS,
+                                "........o.",
+                                ".oxxxx....",
+                                "..x.......",
+                                "..x.......",
+                                ".ox.......",
+                                "..........",
+                                "......o...",
+                                ".o....o...",
+                                "..........",
+                                "...o......"
+                        }, Mark.NOUGHT,
                         null,
                         ResignException.class,
                         null),
