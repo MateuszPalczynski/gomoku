@@ -7,14 +7,16 @@ public class MoveSelector {
     private final Strategy chain;
 
     public MoveSelector() {
+        // Kolejność: natychmiastowa wygrana → blokada → otwarta czwórka → podwójne zagrożenie
         ImmediateWinStrategy s1 = new ImmediateWinStrategy();
-        BlockStrategy         s2 = new BlockStrategy();
-        OpenFourStrategy      s3 = new OpenFourStrategy();
-        DoubleThreatStrategy  s4 = new DoubleThreatStrategy();
+        BlockStrategy       s2 = new BlockStrategy();
+        OpenFourStrategy    s3 = new OpenFourStrategy();
+        DoubleThreatStrategy s4 = new DoubleThreatStrategy();
 
         s1.setNext(s2);
         s2.setNext(s3);
         s3.setNext(s4);
+
         this.chain = s1;
     }
 
@@ -22,4 +24,3 @@ public class MoveSelector {
         return chain.decide(board, me);
     }
 }
-

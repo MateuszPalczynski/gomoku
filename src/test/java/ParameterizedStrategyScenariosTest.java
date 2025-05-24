@@ -129,6 +129,142 @@ class ParameterizedStrategyScenariosTest {
                         }, Mark.CROSS,
                         null,
                         WrongBoardStateException.class,
+                        null),
+
+                // 8. Rezygnacja przy 4
+                Arguments.of(new String[]{
+                                "..........",
+                                "..x...o...",
+                                "...x......",
+                                "....x.....",
+                                "...o.x....",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 9. Rezygnacja przy 3.1
+                Arguments.of(new String[]{
+                                "..........",
+                                "..xxx.o...",
+                                "..x.......",
+                                "..x.......",
+                                "...o......",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 10. Rezygnacja przy 3.2
+                Arguments.of(new String[]{
+                                "..........",
+                                "...x..o...",
+                                "..xxx.....",
+                                "...x......",
+                                ".....o....",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 11. Rezygnacja przy 3.3
+                Arguments.of(new String[]{
+                                "..........",
+                                "...x..o...",
+                                "...xx.....",
+                                "...x.x....",
+                                ".....o....",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 12. Zablokowanie 4
+                Arguments.of(new String[]{
+                                "..o.......",
+                                "...x..o...",
+                                "....x.....",
+                                ".....x....",
+                                "......x...",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.NOUGHT,
+                        new Position(7, 5),
+                        null,
+                        null),
+
+                // 13. Wygrana
+                Arguments.of(new String[]{
+                                "..o.......",
+                                "...x..o...",
+                                "....x.....",
+                                "..........",
+                                "......x...",
+                                ".......x..",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.CROSS,
+                        new Position(5, 3),
+                        null,
+                        null),
+
+                // 14. Uzyskanie 4.1
+                Arguments.of(new String[]{
+                                "..........",
+                                "...x..o...",
+                                "..........",
+                                "...x......",
+                                "...x.o....",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.CROSS,
+                        new Position(3, 2),
+                        null,
+                        null),
+
+                // 15. Uzyskanie 4.2
+                Arguments.of(new String[]{
+                                "..........",
+                                "...x..o...",
+                                "....x.....",
+                                "..........",
+                                "......x...",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.CROSS,
+                        new Position(5, 3),
+                        null,
                         null)
         );
     }
