@@ -265,6 +265,57 @@ class ParameterizedStrategyScenariosTest {
                         }, Mark.CROSS,
                         new Position(5, 3),
                         null,
+                        null),
+
+                // 16.
+                Arguments.of(new String[]{
+                                "..........",
+                                "...xx.o...",
+                                "..x.......",
+                                "..x.......",
+                                "...o......",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.CROSS,
+                        new Position(2, 1),
+                        null,
+                        null),
+
+                // 17
+                Arguments.of(new String[]{
+                                "..........",
+                                "...x..o...",
+                                "..x.x.....",
+                                "...x......",
+                                ".....o....",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.CROSS,
+                        new Position(3, 2),
+                        null,
+                        null),
+
+                // 18.
+                Arguments.of(new String[]{
+                                "..........",
+                                "......o...",
+                                "...xx.....",
+                                "...x.x....",
+                                ".....o....",
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "..........",
+                                "...o......"
+                        }, Mark.CROSS,
+                        new Position(3, 1),
+                        null,
                         null)
         );
     }
