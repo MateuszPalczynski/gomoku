@@ -8,9 +8,10 @@ public class MoveSelector {
 
     public MoveSelector() {
         ImmediateWinStrategy s1 = new ImmediateWinStrategy();
-        OpenFourStrategy s2 = new OpenFourStrategy();
-        DoubleThreatStrategy s3 = new DoubleThreatStrategy();
-        BlockStrategy s4 = new BlockStrategy();
+        BlockStrategy         s2 = new BlockStrategy();
+        OpenFourStrategy      s3 = new OpenFourStrategy();
+        DoubleThreatStrategy  s4 = new DoubleThreatStrategy();
+
         s1.setNext(s2);
         s2.setNext(s3);
         s3.setNext(s4);
@@ -21,3 +22,4 @@ public class MoveSelector {
         return chain.decide(board, me);
     }
 }
+
