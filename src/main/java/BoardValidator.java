@@ -1,5 +1,3 @@
-package gomoku;
-
 import fais.zti.oramus.gomoku.Mark;
 import fais.zti.oramus.gomoku.Move;
 import fais.zti.oramus.gomoku.TheWinnerIsException;

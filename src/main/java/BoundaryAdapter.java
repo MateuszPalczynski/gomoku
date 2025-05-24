@@ -1,5 +1,3 @@
-package gomoku;
-
 import fais.zti.oramus.gomoku.Mark;
 
 /**

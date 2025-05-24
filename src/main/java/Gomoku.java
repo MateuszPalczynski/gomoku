@@ -1,5 +1,4 @@
 import fais.zti.oramus.gomoku.*;
-import gomoku.*;
 
 import java.util.Set;
 

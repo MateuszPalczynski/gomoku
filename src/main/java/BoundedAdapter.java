@@ -1,5 +1,3 @@
-package gomoku;
-
 import fais.zti.oramus.gomoku.Mark;
 
 /** Nie pozwala na wrap-around; wyjście poza tablicę zwraca Mark.NULL. */

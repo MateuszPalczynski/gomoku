@@ -3,9 +3,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import fais.zti.oramus.gomoku.Mark;
 import fais.zti.oramus.gomoku.Move;
 import fais.zti.oramus.gomoku.Position;
-import gomoku.BoardModel;
-import gomoku.BoundedAdapter;
-import gomoku.WinDetector;
 import org.junit.jupiter.api.Test;
 import java.util.Set;
 

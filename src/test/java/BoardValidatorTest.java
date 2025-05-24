@@ -1,8 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import fais.zti.oramus.gomoku.*;
-import gomoku.BoardValidator;
-import gomoku.BoundedAdapter;
 import org.junit.jupiter.api.Test;
 import java.util.Set;
 
