@@ -1,7 +1,9 @@
-package fais.zti.oramus.gomoku;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import fais.zti.oramus.gomoku.Mark;
+import fais.zti.oramus.gomoku.Move;
+import fais.zti.oramus.gomoku.Position;
+import fais.zti.oramus.gomoku.ResignException;
 import gomoku.BoardModel;
 import gomoku.MoveSelector;
 import org.junit.jupiter.api.Test;

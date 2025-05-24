@@ -1,13 +1,10 @@
-package fais.zti.oramus.gomoku;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import Gomoku;
-import GomokuBuilder;
+import fais.zti.oramus.gomoku.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

@@ -1,7 +1,6 @@
-package fais.zti.oramus.gomoku;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import fais.zti.oramus.gomoku.*;
 import gomoku.BoardValidator;
 import gomoku.BoundedAdapter;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,7 @@ public class BoardValidatorTest {
     @Test
     public void testInvalidCount() {
         Set<Move> moves = Set.of(
-                new Move(new Position(0,0),Mark.CROSS),
+                new Move(new Position(0,0), Mark.CROSS),
                 new Move(new Position(1,0),Mark.CROSS),
                 new Move(new Position(2,0),Mark.CROSS)
         );

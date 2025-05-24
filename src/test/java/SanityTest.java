@@ -1,5 +1,3 @@
-package fais.zti.oramus.gomoku;
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 

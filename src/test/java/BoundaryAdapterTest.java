@@ -1,7 +1,6 @@
-package fais.zti.oramus.gomoku;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import fais.zti.oramus.gomoku.Mark;
 import gomoku.BoundaryAdapter;
 import gomoku.BoundedAdapter;
 import gomoku.PeriodicBoundaryAdapter;
