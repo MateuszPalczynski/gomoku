@@ -267,7 +267,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 16.
+                // 16. Zrobienie 3.1
                 Arguments.of(new String[]{
                                 "..........",
                                 "...xx.o...",
@@ -284,7 +284,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 17
+                // 17. Zrobienie 3.2
                 Arguments.of(new String[]{
                                 "..........",
                                 "...x..o...",
@@ -301,7 +301,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 18.
+                // 18. Zrobienie 3.3
                 Arguments.of(new String[]{
                                 "..........",
                                 "......o...",
