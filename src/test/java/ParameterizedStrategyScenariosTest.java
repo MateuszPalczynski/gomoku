@@ -316,6 +316,74 @@ class ParameterizedStrategyScenariosTest {
                         }, Mark.CROSS,
                         new Position(3, 1),
                         null,
+                        null),
+
+                // 19. Cant`t win
+                Arguments.of(new String[]{
+                                "..ooo.....",
+                                ".oxxxooo..",
+                                ".x....o...",
+                                "..x...x...",
+                                "...x.x....",
+                                "...ox.....",
+                                "....x.....",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+                /*
+                // 20. Who is winning
+                Arguments.of(new String[]{
+                                "..........",
+                                "...x......",
+                                "...x......",
+                                "...x......",
+                                "...x.o....",
+                                "...x.o....",
+                                ".....o....",
+                                ".....o....",
+                                ".....o....",
+                                ".........."
+                        }, Mark.CROSS,
+                        null,
+                        WrongBoardStateException.class,
+                        null),
+                */
+                // 21. Double Win
+                Arguments.of(new String[]{
+                                "..........",
+                                "...x..o...",
+                                "...x......",
+                                "...x......",
+                                "...x.o....",
+                                "...xxxxx..",
+                                "...oo..o..",
+                                "..........",
+                                ".ooo......",
+                                "...o......"
+                        }, Mark.CROSS,
+                        null,
+                        TheWinnerIsException.class,
+                        null),
+
+                // 22. Double check
+                Arguments.of(new String[]{
+                                "..........",
+                                ".....o.o..",
+                                "......oo..",
+                                "..........",
+                                "..........",
+                                "...xx.....",
+                                "...xx.....",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(7, 3),
+                        null,
                         null)
         );
     }

@@ -9,7 +9,7 @@ public class GomokuBuilder {
 
     public GomokuBuilder size(int size) {
         if (size <= 0) {
-            throw new IllegalArgumentException("Size must be >=5");
+            throw new IllegalArgumentException("Size must be >=10");
         }
         this.size = size;
         return this;
