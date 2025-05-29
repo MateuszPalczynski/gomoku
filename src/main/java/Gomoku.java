@@ -12,17 +12,17 @@ public class Gomoku implements Game {
 
     @Override
     public void firstMark(Mark first) {
-        // stub: nieużywana w tej implementacji
+
     }
 
     @Override
     public void size(int size) {
-        // stub: nieużywana w tej implementacji
+
     }
 
     @Override
     public void periodicBoundaryConditionsInUse() {
-        // stub: nieużywana w tej implementacji
+
     }
 
     /**
@@ -36,13 +36,6 @@ public class Gomoku implements Game {
                 : new BoundedAdapter();
         this.validator = new BoardValidator(adapter);
         this.selector = new MoveSelector();
-    }
-
-    /**
-     * Publiczny konstruktor bezparametrowy z domyślną konfiguracją.
-     */
-    public Gomoku() {
-        this(15, Mark.CROSS, false);
     }
 
     @Override
