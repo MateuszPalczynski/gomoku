@@ -334,25 +334,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         ResignException.class,
                         null),
-                /*
-                // 20. Who is winning
-                Arguments.of(new String[]{
-                                "..........",
-                                "...x......",
-                                "...x......",
-                                "...x......",
-                                "...x.o....",
-                                "...x.o....",
-                                ".....o....",
-                                ".....o....",
-                                ".....o....",
-                                ".........."
-                        }, Mark.CROSS,
-                        null,
-                        WrongBoardStateException.class,
-                        null),
-                */
-                // 21. Double Win
+                // 20. Double Win
                 Arguments.of(new String[]{
                                 "..........",
                                 "...x..o...",
@@ -369,7 +351,7 @@ class ParameterizedStrategyScenariosTest {
                         TheWinnerIsException.class,
                         null),
 
-                // 22. Double check
+                // 21. Double check
                 Arguments.of(new String[]{
                                 "..........",
                                 ".....o.o..",
@@ -383,6 +365,166 @@ class ParameterizedStrategyScenariosTest {
                                 ".........."
                         }, Mark.NOUGHT,
                         new Position(7, 3),
+                        null,
+                        null),
+                // 22. Double four
+                Arguments.of(new String[]{
+                                "x.........",
+                                "ox........",
+                                ".ox.......",
+                                "..ox......",
+                                "...o......",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(4, 4),
+                        null,
+                        null),
+                // 23. Resign
+                Arguments.of(new String[]{
+                                "..........",
+                                "........x.",
+                                ".....xxo..",
+                                "..xox.o.x.",
+                                ".xxxooox..",
+                                ".oxooox...",
+                                ".oxx......",
+                                "..oxo.....",
+                                "....x..oo.",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+                // 24. Block win
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                ".xoooo....",
+                                "..xx.x....",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(6, 2),
+                        null,
+                        null),
+                // 25. Defend Vs Five
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "oooo.....x",
+                                "..........",
+                                ".....o....",
+                                "..xxx.....",
+                                "..........",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(4, 2),
+                        null,
+                        null),
+                // 26. testAttackMakeFourOpen1
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "....xxx...",
+                                "..........",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(3, 5),
+                        null,
+                        null),
+                // 27.
+                Arguments.of(new String[]{
+                                "..........",
+                                "..x.......",
+                                "..........",
+                                ".....x....",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..x.oo.o.x",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(6, 8),
+                        null,
+                        null),
+                // 28.
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..x.oo.o.x",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(6, 8),
+                        null,
+                        null),
+                // 29.
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                ".xxoooo.x.",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(7, 6),
+                        null,
+                        null),
+                // 30.
+                Arguments.of(new String[]{
+                                ".......x..",
+                                "..........",
+                                "xx........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "....oo.o..",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(6, 8),
+                        null,
+                        null),
+                // 31.
+                Arguments.of(new String[]{
+                                ".......x..",
+                                "..........",
+                                "xxx.......",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "....oo.oo.",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(6, 8),
                         null,
                         null)
         );
