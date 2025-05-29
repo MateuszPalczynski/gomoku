@@ -8,7 +8,6 @@ import java.util.Set;
 /** Kompozyt walidatorów planszy. */
 public class BoardValidator {
     private final BoundaryAdapter adapter;
-    private final WinDetector winDetector = new WinDetector();
 
     public BoardValidator(BoundaryAdapter adapter) {
         this.adapter = adapter;
@@ -19,14 +18,24 @@ public class BoardValidator {
      * @throws TheWinnerIsException gdy pięć w rzędzie już istnieje
      * @throws WrongBoardStateException gdy niepoprawny stan (różnica ruchów >1)
      */
-    public void validate(int size, Set<Move> moves)
+    public void validate(int size, Set<Move> boardState)
             throws TheWinnerIsException, WrongBoardStateException {
-        Mark[][] board = BoardModel.fromMoves(size, moves);
-        if (winDetector.hasWinner(board, adapter)) {
-            throw new TheWinnerIsException(winDetector.getWinner());
+        Mark[][] board = BoardModel.fromMoves(size, boardState);
+        WinDetector detector = new WinDetector(adapter);
+
+        if (detector.hasWinner(board)) {
+            throw new TheWinnerIsException(detector.getWinner());
         }
-        long crossCount = moves.stream().filter(m -> m.mark() == Mark.CROSS).count();
-        long noughtCount = moves.stream().filter(m -> m.mark() == Mark.NOUGHT).count();
+
+        // Fixed: use boardState instead of undefined 'moves'
+        // Fixed: use mark() method of Move objects
+        long crossCount = boardState.stream()
+                .filter(m -> m.mark() == Mark.CROSS)
+                .count();
+        long noughtCount = boardState.stream()
+                .filter(m -> m.mark() == Mark.NOUGHT)
+                .count();
+
         if (Math.abs(crossCount - noughtCount) > 1) {
             throw new WrongBoardStateException();
         }

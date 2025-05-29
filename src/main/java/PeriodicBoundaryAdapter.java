@@ -16,7 +16,27 @@ public class PeriodicBoundaryAdapter implements BoundaryAdapter {
         if (target == Mark.NULL) {
             return 0;
         }
-        // w trybie periodic dla każdego pola != NULL zwracamy pełną długość planszy
-        return board.length;
+        // Handle zero-direction case (no movement)
+        if (dr == 0 && dc == 0) {
+            return 1;
+        }
+
+        int n = board.length;
+        int count = 0;
+        int rr = r;
+        int cc = c;
+
+        // Traverse at most 'n' cells to avoid infinite loops and overcounting
+        for (int i = 0; i < n; i++) {
+            Mark current = get(board, rr, cc);
+            if (current != target) {
+                break; // Stop at first non-matching mark
+            }
+            count++;
+            // Move to next position (wrapping handled in get())
+            rr += dr;
+            cc += dc;
+        }
+        return count;
     }
 }

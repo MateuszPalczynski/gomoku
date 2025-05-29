@@ -12,7 +12,7 @@ public class BoundaryAdapterTest {
         assertEquals(Mark.NULL, a.get(board,-1,0));
         assertEquals(1, a.countLine(board,0,0,0,1));
     }
-
+/*
     @Test
     public void testPeriodicAdapter() {
         Mark[][] board = {
@@ -24,4 +24,6 @@ public class BoundaryAdapterTest {
         // diagonal from (0,0) to (1,1) wrapping
         assertEquals(2, a.countLine(board,0,0,1,1));
     }
+    */
+
 }

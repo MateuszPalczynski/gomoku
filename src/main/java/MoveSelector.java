@@ -6,12 +6,12 @@ import fais.zti.oramus.gomoku.ResignException;
 public class MoveSelector {
     private final Strategy chain;
 
-    public MoveSelector() {
-        // Kolejność: natychmiastowa wygrana → blokada → otwarta czwórka → podwójne zagrożenie
-        ImmediateWinStrategy s1 = new ImmediateWinStrategy();
-        BlockStrategy       s2 = new BlockStrategy();
-        OpenFourStrategy    s3 = new OpenFourStrategy();
-        DoubleThreatStrategy s4 = new DoubleThreatStrategy();
+    public MoveSelector(BoundaryAdapter adapter) {
+        // Create strategies with injected adapter
+        ImmediateWinStrategy s1 = new ImmediateWinStrategy(adapter);
+        BlockStrategy s2 = new BlockStrategy(adapter);
+        OpenFourStrategy s3 = new OpenFourStrategy(adapter);
+        DoubleThreatStrategy s4 = new DoubleThreatStrategy(adapter);
 
         s1.setNext(s2);
         s2.setNext(s3);

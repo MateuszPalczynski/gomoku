@@ -4,13 +4,10 @@ import fais.zti.oramus.gomoku.Position;
 
 /** Szuka linii czterech z dwóch otwartych końców. */
 public class OpenFourStrategy extends AbstractStrategy {
-
-    /** Domyślny konstruktor korzystający z bounded adapter. */
     public OpenFourStrategy() {
         super();
     }
 
-    /** Konstruktor z własnym adapterem brzegów. */
     public OpenFourStrategy(BoundaryAdapter adapter) {
         super(adapter);
     }

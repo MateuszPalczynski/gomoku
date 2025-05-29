@@ -3,8 +3,16 @@ import fais.zti.oramus.gomoku.Mark;
 /** Wykrywa, czy na planszy jest zwycięzca. */
 public class WinDetector {
     private Mark winner = Mark.NULL;
+    private final BoundaryAdapter adapter;
 
-    public boolean hasWinner(Mark[][] board, BoundaryAdapter adapter) {
+    public WinDetector(BoundaryAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public boolean hasWinner(Mark[][] board) {
+        // Reset winner state before each detection
+        winner = Mark.NULL;
+
         int n = board.length;
         int[][] dirs = {{0,1},{1,0},{1,1},{1,-1}};
         for (int r = 0; r < n; r++) {

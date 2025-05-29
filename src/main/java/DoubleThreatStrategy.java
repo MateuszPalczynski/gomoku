@@ -4,12 +4,10 @@ import fais.zti.oramus.gomoku.Position;
 
 /** Tworzy podwójne zagrożenie – dwa otwarte trójki. */
 public class DoubleThreatStrategy extends AbstractStrategy {
-    /** Domyślny konstruktor korzystający z bounded adapter. */
     public DoubleThreatStrategy() {
         super();
     }
 
-    /** Konstruktor z własnym adapterem brzegów. */
     public DoubleThreatStrategy(BoundaryAdapter adapter) {
         super(adapter);
     }
