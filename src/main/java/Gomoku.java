@@ -33,6 +33,13 @@ public class Gomoku implements Game {
         this.selector = new MoveSelector(adapter);  // Pass adapter to selector
     }
 
+    /**
+     * Publiczny konstruktor bezparametrowy z domyślną konfiguracją.
+     */
+    public Gomoku() {
+        this(15, Mark.CROSS, false);
+    }
+
     @Override
     public Move nextMove(Set<Move> boardState, Mark nextMoveMark)
             throws ResignException, TheWinnerIsException, WrongBoardStateException {
