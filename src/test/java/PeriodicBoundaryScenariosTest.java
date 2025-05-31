@@ -34,11 +34,11 @@ class PeriodicBoundaryScenariosTest {
                 // 2. Immediate win via horizontal wrap on 10×10
                 Arguments.of(new String[]{
                                 "xxxxo.....",
-                                ".........o",
-                                ".........o",
-                                ".........o",
-                                ".........o",
                                 "..........",
+                                "..........",
+                                "..o......o",
+                                ".........o",
+                                ".........o",
                                 "..........",
                                 "...x......",
                                 "..........",
