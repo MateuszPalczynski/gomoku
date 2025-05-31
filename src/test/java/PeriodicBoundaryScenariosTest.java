@@ -101,6 +101,22 @@ class PeriodicBoundaryScenariosTest {
                         Mark.CROSS,
                         new Position(2, 9),
                         null,
+                        null),
+                // 6. Standard on periodic
+                Arguments.of(new String[]{
+                                "..........",
+                                "...xxx....",
+                                "..........",
+                                "....o.....",
+                                "..........",
+                                "..........",
+                                "..........",
+                                ".....o....",
+                                ".....o....",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(2, 1),
+                        null,
                         null)
         );
     }

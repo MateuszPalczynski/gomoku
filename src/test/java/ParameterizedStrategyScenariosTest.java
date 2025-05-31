@@ -526,6 +526,54 @@ class ParameterizedStrategyScenariosTest {
                         }, Mark.CROSS,
                         new Position(6, 8),
                         null,
+                        null),
+                // 32. Ora1
+                Arguments.of(new String[]{
+                                "..........",
+                                ".......o..",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "..........",
+                                "......x...",
+                                "......x...",
+                                "....xx....",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(2, 3),
+                        null,
+                        null),
+                // 33. Ora2
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "..........",
+                                "......x...",
+                                "......x...",
+                                "....xx....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(2, 3),
+                        null,
+                        null),
+                // 34. Ora2
+                Arguments.of(new String[]{
+                                "..x.....x.",
+                                "..........",
+                                "...x......",
+                                "...ooo..x.",
+                                "..........",
+                                ".......x..",
+                                "...xx.o...",
+                                "......o...",
+                                "....oo....",
+                                ".........x"
+                        }, Mark.NOUGHT,
+                        new Position(2, 3),
+                        null,
                         null)
         );
     }
