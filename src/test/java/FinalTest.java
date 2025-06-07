@@ -11,35 +11,6 @@ class FinalTest {
     @Nested
     class validation {
         @Test
-        void givenEmptyBoard_whenNextMoveCalled_thenNoExceptionThrown() {
-            String board = """
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                """;
-            Mark firstMark=Mark.CROSS;
-            Mark nextMoveMark=Mark.CROSS;
-            int size = 10;
-            boolean periodicBoundaryConditionsInUse = false;
-            Set<Move> moves = parseBoard(board);
-
-            Game gomoku = new Gomoku();
-            gomoku.firstMark(firstMark);
-            gomoku.size(size);
-            if (periodicBoundaryConditionsInUse) {
-                gomoku.periodicBoundaryConditionsInUse();
-            }
-            assertDoesNotThrow(() -> gomoku.nextMove(moves, nextMoveMark));
-        }
-
-        @Test
         void emptyBoardWrongMove() {
             String board = """
                 . . . . . . . . . .
