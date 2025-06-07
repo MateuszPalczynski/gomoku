@@ -559,7 +559,7 @@ class ParameterizedStrategyScenariosTest {
                         new Position(2, 3),
                         null,
                         null),
-                // 34. Ora2
+                // 34. Ora3
                 Arguments.of(new String[]{
                                 "..x.....x.",
                                 "..........",
@@ -573,6 +573,102 @@ class ParameterizedStrategyScenariosTest {
                                 ".........x"
                         }, Mark.NOUGHT,
                         new Position(2, 3),
+                        null,
+                        null),
+                // 35. Ora4
+                Arguments.of(new String[]{
+                                ".o........",
+                                "....o.....",
+                                "......o...",
+                                "...xxx....",
+                                "..........",
+                                "..oo......",
+                                "......x...",
+                                "......x...",
+                                "....xx....",
+                                "..o......o"
+                        }, Mark.CROSS,
+                        new Position(2, 3),
+                        null,
+                        null),
+                // 36. Ora5
+                Arguments.of(new String[]{
+                                ".......x..",
+                                "..........",
+                                "..ooxoo...",
+                                "...x.xo..o",
+                                "..xxo.o.x.",
+                                "...x...xo.",
+                                "x.xo....x.",
+                                ".........o",
+                                "..........",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(1, 5),
+                        null,
+                        null),
+                // 37. Ora6
+                Arguments.of(new String[]{
+                                ".x...o....",
+                                ".x..ox...o",
+                                ".x.o..oxox",
+                                ".......o..",
+                                "....ox..o.",
+                                ".....x...o",
+                                "......xx..",
+                                ".......x..",
+                                "........o.",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(5, 6),
+                        null,
+                        null),
+                // 38. Ora
+                Arguments.of(new String[]{
+                                "..........",
+                                ".....o....",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "..........",
+                                "......x...",
+                                "......x...",
+                                "....xx....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        null,
+                        WrongBoardStateException.class,
+                        null),
+                // 39. Ora
+                Arguments.of(new String[]{
+                                "..........",
+                                ".....o....",
+                                "..........",
+                                "...oo.....",
+                                "....o.....",
+                                "..........",
+                                "........x.",
+                                ".......x..",
+                                "....xx....",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(6, 8),
+                        null,
+                        null),
+                // 40. Ora
+                Arguments.of(new String[]{
+                                ".......o..",
+                                "..........",
+                                "....o.....",
+                                "...o.o....",
+                                "..........",
+                                "....x.x...",
+                                "....xx....",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(4, 7),
                         null,
                         null)
         );
