@@ -655,7 +655,7 @@ class ParameterizedStrategyScenariosTest {
                         new Position(6, 8),
                         null,
                         null),
-                // 41. Double atack 1
+                // 40. Double atack 1
                 Arguments.of(new String[]{
                                 "........x.",
                                 "..........",
@@ -672,7 +672,7 @@ class ParameterizedStrategyScenariosTest {
                         ResignException.class,
                         null),
 
-                // 42. Double atack 2
+                // 41. Double atack 2
                 Arguments.of(new String[]{
                                 "..........",
                                 "..........",
@@ -689,7 +689,7 @@ class ParameterizedStrategyScenariosTest {
                         ResignException.class,
                         null),
 
-                // 43. Double atack 3
+                // 42. Double atack 3
                 Arguments.of(new String[]{
                                 "o........",
                                 "...x.o....",
@@ -706,7 +706,7 @@ class ParameterizedStrategyScenariosTest {
                         ResignException.class,
                         null),
 
-                // 44. Priorytet 1.1
+                // 43. Priorytet 1.1
                 Arguments.of(new String[]{
                                 "..........",
                                 "..oo.oo...",
@@ -723,7 +723,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 45. Priorytet 1.2
+                // 44. Priorytet 1.2
                 Arguments.of(new String[]{
                                 "..........",
                                 "..oo.oo...",
@@ -740,7 +740,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 46. Priorytet 1.3
+                // 45. Priorytet 1.3
                 Arguments.of(new String[]{
                                 "........xx",
                                 "..oo.oo...",
@@ -757,7 +757,7 @@ class ParameterizedStrategyScenariosTest {
                         ResignException.class,
                         null),
 
-                // 47. Priorytet 2.1
+                // 46. Priorytet 2.1
                 Arguments.of(new String[]{
                                 "..........",
                                 "..........",
@@ -774,7 +774,7 @@ class ParameterizedStrategyScenariosTest {
                         ResignException.class,
                         null),
 
-                // 48. Priorytet 2.2
+                // 47. Priorytet 2.2
                 Arguments.of(new String[]{
                                 "...o......",
                                 "..........",
@@ -787,11 +787,11 @@ class ParameterizedStrategyScenariosTest {
                                 "....x.....",
                                 ".........."
                         }, Mark.CROSS,
-                        new Position(3, 9),
+                        new Position(8, 4),
                         null,
                         null),
 
-                // 49. Priorytet 2.3
+                // 48. Priorytet 2.3
                 Arguments.of(new String[]{
                                 ".........o",
                                 "o........o",
@@ -808,7 +808,7 @@ class ParameterizedStrategyScenariosTest {
                         ResignException.class,
                         null),
 
-                // 50. Priorytet 2.4
+                // 49. Priorytet 2.4
                 Arguments.of(new String[]{
                                 ".........o",
                                 "o........o",
@@ -821,11 +821,11 @@ class ParameterizedStrategyScenariosTest {
                                 "....x.....",
                                 ".........."
                         }, Mark.CROSS,
-                        new Position(3, 9),
+                        new Position(8, 4),
                         null,
                         null),
 
-                // 51. Priorytet 3.1
+                // 50. Priorytet 3.1
                 Arguments.of(new String[]{
                                 "..........",
                                 "..........",
@@ -838,11 +838,11 @@ class ParameterizedStrategyScenariosTest {
                                 "xxxx......",
                                 ".........."
                         }, Mark.NOUGHT,
-                        new Position(4, 9),
+                        new Position(4, 8),
                         null,
                         null),
 
-                // 52. Priorytet 3.2
+                // 51. Priorytet 3.2
                 Arguments.of(new String[]{
                                 ".........o",
                                 "..........",
@@ -855,11 +855,11 @@ class ParameterizedStrategyScenariosTest {
                                 "xxxx......",
                                 ".........."
                         }, Mark.CROSS,
-                        new Position(4, 9),
+                        new Position(4, 8),
                         null,
                         null),
 
-                // 53. Priorytet 3.3
+                // 52. Priorytet 3.3
                 Arguments.of(new String[]{
                                 ".xx.......",
                                 "..........",
@@ -876,7 +876,7 @@ class ParameterizedStrategyScenariosTest {
                         ResignException.class,
                         null),
 
-                // 54. Priorytet 3.4
+                // 53. Priorytet 3.4
                 Arguments.of(new String[]{
                                 ".xx.......",
                                 "..........",
@@ -889,11 +889,11 @@ class ParameterizedStrategyScenariosTest {
                                 "oooo......",
                                 ".........."
                         }, Mark.NOUGHT,
-                        new Position(4, 9),
+                        new Position(4, 8),
                         null,
                         null),
 
-                // 55. Priorytet 4.1
+                // 54. Priorytet 4.1
                 Arguments.of(new String[]{
                                 "..........",
                                 "..........",
@@ -910,7 +910,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 56. Priorytet 4.2
+                // 55. Priorytet 4.2
                 Arguments.of(new String[]{
                                 ".........o",
                                 "..........",
@@ -927,7 +927,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 57. Priorytet 4.3
+                // 56. Priorytet 4.3
                 Arguments.of(new String[]{
                                 "oo........",
                                 ".....oo...",
@@ -944,7 +944,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 58. Priorytet 4.4
+                // 57. Priorytet 4.4
                 Arguments.of(new String[]{
                                 "oo........",
                                 ".....oo...",
@@ -961,7 +961,7 @@ class ParameterizedStrategyScenariosTest {
                         ResignException.class,
                         null),
 
-                // 59. Priorytet 5.1
+                // 58. Priorytet 5.1
                 Arguments.of(new String[]{
                                 "..........",
                                 "..........",
@@ -978,7 +978,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 60. Priorytet 5.2
+                // 59. Priorytet 5.2
                 Arguments.of(new String[]{
                                 "..........",
                                 "..........",
@@ -995,7 +995,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 61. Priorytet 5.3
+                // 60. Priorytet 5.3
                 Arguments.of(new String[]{
                                 "oo......oo",
                                 "..........",
@@ -1012,7 +1012,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 62. Priorytet 5.4
+                // 61. Priorytet 5.4
                 Arguments.of(new String[]{
                                 "oo......o.",
                                 "..........",
