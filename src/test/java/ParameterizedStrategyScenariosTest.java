@@ -40,7 +40,7 @@ class ParameterizedStrategyScenariosTest {
                                 "....o.....",
                                 "..........",
                                 "..........",
-                                ".........."
+                                ".........x"
                         }, Mark.NOUGHT,
                         new Position(0, 1),
                         null,
@@ -65,7 +65,7 @@ class ParameterizedStrategyScenariosTest {
 
                 // 4. Podwójne zagrożenie (X jednocześnie tworzy dwa 4-w-rzędzie)
                 Arguments.of(new String[]{
-                                ".......o..",
+                                "..........",
                                 "..xxx.....",
                                 "..x.......",
                                 "..x.......",
@@ -91,7 +91,7 @@ class ParameterizedStrategyScenariosTest {
                                 "......o...",
                                 ".o....o...",
                                 "..........",
-                                "...o......"
+                                ".........."
                         }, Mark.NOUGHT,
                         null,
                         ResignException.class,
@@ -142,7 +142,7 @@ class ParameterizedStrategyScenariosTest {
                                 ".......o..",
                                 "..........",
                                 "..........",
-                                "...o......"
+                                ".........."
                         }, Mark.NOUGHT,
                         null,
                         ResignException.class,
@@ -210,7 +210,7 @@ class ParameterizedStrategyScenariosTest {
                                 ".......o..",
                                 "..........",
                                 "..........",
-                                "...o......"
+                                ".........."
                         }, Mark.NOUGHT,
                         new Position(7, 5),
                         null,
@@ -244,7 +244,7 @@ class ParameterizedStrategyScenariosTest {
                                 ".......o..",
                                 "..........",
                                 "..........",
-                                "...o......"
+                                "...o.....x"
                         }, Mark.CROSS,
                         new Position(3, 2),
                         null,
@@ -362,7 +362,7 @@ class ParameterizedStrategyScenariosTest {
                                 "...xx.....",
                                 "..........",
                                 "..........",
-                                ".........."
+                                ".........x"
                         }, Mark.NOUGHT,
                         new Position(7, 3),
                         null,
@@ -426,7 +426,7 @@ class ParameterizedStrategyScenariosTest {
                                 "..........",
                                 "..........",
                                 "..........",
-                                ".........."
+                                ".........x"
                         }, Mark.CROSS,
                         new Position(4, 2),
                         null,
@@ -466,7 +466,7 @@ class ParameterizedStrategyScenariosTest {
                 // 28.
                 Arguments.of(new String[]{
                                 "..........",
-                                "..........",
+                                ".......x..",
                                 "..........",
                                 "..........",
                                 "..........",
@@ -481,10 +481,10 @@ class ParameterizedStrategyScenariosTest {
                         null),
                 // 29.
                 Arguments.of(new String[]{
+                                ".........x",
                                 "..........",
                                 "..........",
-                                "..........",
-                                "..........",
+                                ".x........",
                                 "..........",
                                 "..........",
                                 ".xxoooo.x.",
@@ -674,7 +674,7 @@ class ParameterizedStrategyScenariosTest {
 
                 // 41. Double atack 2
                 Arguments.of(new String[]{
-                                "..........",
+                                "...x......",
                                 "..........",
                                 ".........o",
                                 "...ooo....",
@@ -750,7 +750,7 @@ class ParameterizedStrategyScenariosTest {
                                 "........o.",
                                 ".x........",
                                 ".x......o.",
-                                "....x...o.",
+                                "........o.",
                                 "....x....x"
                         }, Mark.CROSS,
                         null,
@@ -819,7 +819,7 @@ class ParameterizedStrategyScenariosTest {
                                 "......x...",
                                 ".....x....",
                                 "....x.....",
-                                ".........."
+                                "........o."
                         }, Mark.CROSS,
                         new Position(8, 4),
                         null,
@@ -963,7 +963,7 @@ class ParameterizedStrategyScenariosTest {
 
                 // 58. Priorytet 5.1
                 Arguments.of(new String[]{
-                                "..........",
+                                ".........x",
                                 "..........",
                                 "..........",
                                 "...oo.....",

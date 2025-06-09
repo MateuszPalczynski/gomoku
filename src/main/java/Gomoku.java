@@ -15,7 +15,7 @@ public class Gomoku implements Game {
      * Public no-arg constructor: uses defaults (15×15, CROSS, bounded).
      */
     public Gomoku() {
-        this.size = 15;
+        this.size = 10;
         this.firstMark = Mark.CROSS;
         this.periodic = false;
         reinit();
@@ -62,7 +62,7 @@ public class Gomoku implements Game {
         this.adapter = periodic
                 ? new PeriodicBoundaryAdapter()
                 : new BoundedAdapter();
-        this.validator = new BoardValidator(adapter);
+        this.validator = new BoardValidator(adapter, firstMark);
         this.selector  = new MoveSelector(adapter);
         this.threatDetector = new ThreatDetector(adapter, size);
     }
@@ -73,13 +73,13 @@ public class Gomoku implements Game {
         // 0) Build current board
         Mark[][] board = BoardModel.fromMoves(size, boardState);
 
-        // 1) Full board => resignation
+        // 1) Full board => WrongBoardStateException
         if (boardState.size() >= size * size) {
             throw new ResignException();
         }
 
         // 2) Validate state (existing winner or wrong turn)
-        validator.validate(size, boardState);
+        validator.validate(size, boardState, nextMoveMark);
 
         Mark opponent = (nextMoveMark == Mark.CROSS ? Mark.NOUGHT : Mark.CROSS);
 
