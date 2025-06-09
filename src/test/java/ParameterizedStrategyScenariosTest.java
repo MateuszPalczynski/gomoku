@@ -704,8 +704,330 @@ class ParameterizedStrategyScenariosTest {
                         }, Mark.NOUGHT,
                         null,
                         ResignException.class,
-                        null)
+                        null),
 
+                // 44. Priorytet 1.1
+                Arguments.of(new String[]{
+                                "..........",
+                                "..oo.oo...",
+                                "..........",
+                                "..........",
+                                "x.........",
+                                "........x.",
+                                "........x.",
+                                "..........",
+                                "........x.",
+                                "........x."
+                        }, Mark.NOUGHT,
+                        new Position(4, 1),
+                        null,
+                        null),
+
+                // 45. Priorytet 1.2
+                Arguments.of(new String[]{
+                                "..........",
+                                "..oo.oo...",
+                                "..........",
+                                "..........",
+                                "........x.",
+                                "........x.",
+                                "..........",
+                                "........x.",
+                                "........x.",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(8, 6),
+                        null,
+                        null),
+
+                // 46. Priorytet 1.3
+                Arguments.of(new String[]{
+                                "........xx",
+                                "..oo.oo...",
+                                "..........",
+                                "x.........",
+                                "x.......o.",
+                                "........o.",
+                                ".x........",
+                                ".x......o.",
+                                "....x...o.",
+                                "....x....x"
+                        }, Mark.CROSS,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 47. Priorytet 2.1
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                ".......x..",
+                                "......x...",
+                                ".....x....",
+                                "....x.....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 48. Priorytet 2.2
+                Arguments.of(new String[]{
+                                "...o......",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                ".......x..",
+                                "......x...",
+                                ".....x....",
+                                "....x.....",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(3, 9),
+                        null,
+                        null),
+
+                // 49. Priorytet 2.3
+                Arguments.of(new String[]{
+                                ".........o",
+                                "o........o",
+                                "o.........",
+                                "...xxx....",
+                                "..........",
+                                "oo.....x..",
+                                "......x...",
+                                ".....x....",
+                                "....x.....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 50. Priorytet 2.4
+                Arguments.of(new String[]{
+                                ".........o",
+                                "o........o",
+                                "o.........",
+                                "...xxx....",
+                                "..........",
+                                "oo.....x..",
+                                "......x...",
+                                ".....x....",
+                                "....x.....",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(3, 9),
+                        null,
+                        null),
+
+                // 51. Priorytet 3.1
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "xxxx......",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(4, 9),
+                        null,
+                        null),
+
+                // 52. Priorytet 3.2
+                Arguments.of(new String[]{
+                                ".........o",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "xxxx......",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(4, 9),
+                        null,
+                        null),
+
+                // 53. Priorytet 3.3
+                Arguments.of(new String[]{
+                                ".xx.......",
+                                "..........",
+                                "......xx..",
+                                "...ooo....",
+                                "..........",
+                                ".....x....",
+                                "..........",
+                                "xx........",
+                                "oooo......",
+                                ".........."
+                        }, Mark.CROSS,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 54. Priorytet 3.4
+                Arguments.of(new String[]{
+                                ".xx.......",
+                                "..........",
+                                "......xx..",
+                                "...ooo....",
+                                "..........",
+                                ".....xx...",
+                                "..........",
+                                "xx........",
+                                "oooo......",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(4, 9),
+                        null,
+                        null),
+
+                // 55. Priorytet 4.1
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "..........",
+                                "........x.",
+                                ".......x..",
+                                "....xx....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(2, 3),
+                        null,
+                        null),
+
+                // 56. Priorytet 4.2
+                Arguments.of(new String[]{
+                                ".........o",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "..........",
+                                "........x.",
+                                ".......x..",
+                                "....xx....",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(2, 3),
+                        null,
+                        null),
+
+                // 57. Priorytet 4.3
+                Arguments.of(new String[]{
+                                "oo........",
+                                ".....oo...",
+                                "..........",
+                                "...xxx....",
+                                "..........",
+                                "ooo.......",
+                                "........x.",
+                                ".......x..",
+                                "....xx....",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(2, 3),
+                        null,
+                        null),
+
+                // 58. Priorytet 4.4
+                Arguments.of(new String[]{
+                                "oo........",
+                                ".....oo...",
+                                "..........",
+                                "...xxx....",
+                                "..........",
+                                "oo........",
+                                "........x.",
+                                ".......x..",
+                                "....xx....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 59. Priorytet 5.1
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "...oo.....",
+                                ".....o....",
+                                "...x..o...",
+                                "...x......",
+                                "....x.....",
+                                ".....x....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(3, 2),
+                        null,
+                        null),
+
+                // 60. Priorytet 5.2
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "..........",
+                                "...oo.....",
+                                ".....o....",
+                                "...x..o...",
+                                "...x......",
+                                "....x.....",
+                                ".....x....",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(2, 5),
+                        null,
+                        null),
+
+                // 61. Priorytet 5.3
+                Arguments.of(new String[]{
+                                "oo......oo",
+                                "..........",
+                                "..........",
+                                "...xx....o",
+                                ".....x...o",
+                                "...x..x...",
+                                "...x......",
+                                "....x.....",
+                                ".....x...o",
+                                ".........o"
+                        }, Mark.CROSS,
+                        new Position(3, 2),
+                        null,
+                        null),
+
+                // 62. Priorytet 5.4
+                Arguments.of(new String[]{
+                                "oo......o.",
+                                "..........",
+                                "..........",
+                                "...xx....o",
+                                ".....x...o",
+                                "...x..x...",
+                                "...x......",
+                                "....x.....",
+                                ".....x...o",
+                                ".........o"
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
+                        null)
         );
     }
 
