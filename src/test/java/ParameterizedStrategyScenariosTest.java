@@ -655,22 +655,57 @@ class ParameterizedStrategyScenariosTest {
                         new Position(6, 8),
                         null,
                         null),
-                // 40. Ora
+                // 41. Double atack 1
                 Arguments.of(new String[]{
-                                ".......o..",
-                                "..........",
-                                "....o.....",
-                                "...o.o....",
-                                "..........",
-                                "....x.x...",
-                                "....xx....",
+                                "........x.",
                                 "..........",
                                 "..........",
-                                ".........."
+                                "...ooo.o..",
+                                "..........",
+                                "......oooo",
+                                ".x........",
+                                "xxx......x",
+                                ".x........",
+                                ".......x.."
                         }, Mark.CROSS,
-                        new Position(4, 7),
                         null,
+                        ResignException.class,
+                        null),
+
+                // 42. Double atack 2
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                ".........o",
+                                "...ooo....",
+                                ".........o",
+                                ".........o",
+                                "..........",
+                                "xx.......x",
+                                ".x........",
+                                ".......x.."
+                        }, Mark.CROSS,
+                        null,
+                        ResignException.class,
+                        null),
+
+                // 43. Double atack 3
+                Arguments.of(new String[]{
+                                "o........",
+                                "...x.o....",
+                                "...x......",
+                                "....xx..o.",
+                                "..........",
+                                "..o.......",
+                                "........x.",
+                                ".......x..",
+                                "o...xx....",
+                                "........oo"
+                        }, Mark.NOUGHT,
+                        null,
+                        ResignException.class,
                         null)
+
         );
     }
 
