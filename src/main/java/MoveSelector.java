@@ -8,12 +8,15 @@ public class MoveSelector {
 
     public MoveSelector(BoundaryAdapter adapter) {
         // Create strategies with injected adapter
-        BlockStrategy s2 = new BlockStrategy(adapter);
-        OpenFourStrategy s3 = new OpenFourStrategy(adapter);
-        DoubleThreatStrategy s4 = new DoubleThreatStrategy(adapter);
+
+        Strategy s2 = new BlockWinStrategy(adapter);
+        Strategy s3 = new OpenFourStrategy(adapter);
+        Strategy s4 = new BlockOpenFourStrategy(adapter);
+        Strategy s5 = new DoubleThreatStrategy(adapter);
 
         s2.setNext(s3);
         s3.setNext(s4);
+        s4.setNext(s5);
 
         this.chain = s2;
     }
