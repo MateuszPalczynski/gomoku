@@ -29,12 +29,12 @@ public class BlockOpenFourStrategy extends AbstractStrategy {
                         int total = 1 + positive + negative;
 
                         if (total == 4) {
-                            int rF = r + (positive + 1) * dr;
-                            int cF = c + (positive + 1) * dc;
-                            int rB = r - (negative + 1) * dr;
-                            int cB = c - (negative + 1) * dc;
-                            if (adapter.get(board, rF, cF) == Mark.NULL &&
-                                    adapter.get(board, rB, cB) == Mark.NULL) {
+                            int frontR = r + (positive + 1) * dr;
+                            int frontC = c + (positive + 1) * dc;
+                            int backR = r - (negative + 1) * dr;
+                            int backC = c - (negative + 1) * dc;
+                            if (adapter.isOnBoard(board, frontR, frontC) && adapter.get(board, frontR, frontC) == Mark.NULL &&
+                                    adapter.isOnBoard(board, backR, backC) && adapter.get(board, backR, backC) == Mark.NULL) {
                                 createdOpen4 = true;
                                 break;
                             }

@@ -19,6 +19,7 @@ public class DoubleThreatStrategy extends AbstractStrategy {
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < n; c++) {
                 if (board[r][c] != Mark.NULL) continue;
+
                 board[r][c] = me;
                 int threats = 0;
                 for (int[] dir : dirs) {
@@ -27,17 +28,18 @@ public class DoubleThreatStrategy extends AbstractStrategy {
                     int pos = countDirection(board, me, r, c, dr, dc);
                     int total = neg + 1 + pos;
                     if (total == 3) {
-                        int backR = r - (neg + 1) * dr;
-                        int backC = c - (neg + 1) * dc;
                         int frontR = r + (pos + 1) * dr;
                         int frontC = c + (pos + 1) * dc;
-                        if (adapter.get(board, backR, backC) == Mark.NULL &&
-                                adapter.get(board, frontR, frontC) == Mark.NULL) {
+                        int backR = r - (neg + 1) * dr;
+                        int backC = c - (neg + 1) * dc;
+                        if (adapter.isOnBoard(board, frontR, frontC) && adapter.get(board, frontR, frontC) == Mark.NULL &&
+                                adapter.isOnBoard(board, backR, backC) && adapter.get(board, backR, backC) == Mark.NULL) {
                             threats++;
                         }
                     }
                 }
                 board[r][c] = Mark.NULL;
+
                 if (threats >= 2) {
                     return new Move(new Position(c, r), me);
                 }

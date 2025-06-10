@@ -34,8 +34,9 @@ public class OpenFourStrategy extends AbstractStrategy {
                         int frontR = r + (pos + 1) * dr;
                         int frontC = c + (pos + 1) * dc;
 
-                        if (adapter.get(board, backR, backC) == Mark.NULL &&
-                                adapter.get(board, frontR, frontC) == Mark.NULL) {
+                        if (adapter.isOnBoard(board, frontR, frontC) && adapter.get(board, frontR, frontC) == Mark.NULL &&
+                                adapter.isOnBoard(board, backR, backC) && adapter.get(board, backR, backC) == Mark.NULL) {
+
                             board[r][c] = Mark.NULL;
                             return new Move(new Position(c, r), me);
                         }

@@ -39,4 +39,9 @@ public class PeriodicBoundaryAdapter implements BoundaryAdapter {
         }
         return count;
     }
+
+    @Override
+    public boolean isOnBoard(Mark[][] board, int r, int c) {
+        return true; // On a periodic board, every coordinate maps to a valid cell.
+    }
 }
