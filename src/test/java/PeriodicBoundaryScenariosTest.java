@@ -70,18 +70,18 @@ class PeriodicBoundaryScenariosTest {
                 // 4. Open‐four diagonal wrap on 10×10
                 Arguments.of(new String[]{
                                 "..........",
-                                "x....o....",
-                                ".x........",
-                                "..x....o..",
+                                ".....o....",
+                                "..........",
+                                ".......o..",
                                 ".......o..",
                                 ".......o..",
                                 ".......o..",
                                 "..........",
-                                ".........x",
+                                "xxx......x",
                                 ".........x"
                         },
                         Mark.CROSS,
-                        new Position(3, 4),
+                        new Position(3, 8),
                         null,
                         null),
 

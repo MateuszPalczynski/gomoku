@@ -1061,6 +1061,74 @@ class ParameterizedStrategyScenariosTest {
                         }, Mark.CROSS,
                         new Position(2, 5),
                         null,
+                        null),
+
+                // 63. Brak miejsca
+                Arguments.of(new String[]{
+                                "...xx.....",
+                                ".........o",
+                                ".x.......o",
+                                ".x.......o",
+                                "..........",
+                                ".........x",
+                                "...oo.....",
+                                ".....o....",
+                                ".....o..x.",
+                                "x.......x."
+                        }, Mark.NOUGHT,
+                        new Position(5, 6),
+                        null,
+                        null),
+
+                // 64.
+                Arguments.of(new String[]{
+                                "..........",
+                                ".........o",
+                                ".x.......o",
+                                ".x.......o",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "........x.",
+                                "........x."
+                        }, Mark.NOUGHT,
+                        new Position(9, 4),
+                        null,
+                        null),
+
+                // 65.
+                Arguments.of(new String[]{
+                                "..........",
+                                ".........o",
+                                ".........o",
+                                ".x.......o",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "........x.",
+                                "........x."
+                        }, Mark.CROSS,
+                        new Position(9, 4),
+                        null,
+                        null),
+
+                // 66.
+                Arguments.of(new String[]{
+                                "..........",
+                                ".........o",
+                                ".........o",
+                                ".x.......o",
+                                "..x.......",
+                                "...x......",
+                                "..........",
+                                "..........",
+                                "..........",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(4, 6),
+                        null,
                         null)
         );
     }

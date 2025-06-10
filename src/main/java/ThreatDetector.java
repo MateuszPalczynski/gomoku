@@ -4,6 +4,10 @@ import fais.zti.oramus.gomoku.Position;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Detects critical threats for a given player.
+ * A threat is either an "Open Three" or a "Four".
+ */
 public class ThreatDetector {
     private final BoundaryAdapter adapter;
 
@@ -16,114 +20,105 @@ public class ThreatDetector {
     }
 
     /**
-     * Counts the number of distinct groups of three stones that constitute an "open three" threat.
-     * An open three threat is any arrangement of 3 stones that can be made into an open four
-     * with one move.
-     *
-     * @param board      The current game board.
-     * @param playerMark The mark of the player whose threats are to be counted.
-     * @return The number of unique open three threats.
+     * Counts unique "open three" threats. An open three is an arrangement of 3 stones
+     * that can become an open four in one move.
      */
     public int countOpenThrees(Mark[][] board, Mark playerMark) {
-        if (board == null || playerMark == Mark.NULL) {
-            return 0;
-        }
+        return countThreats(board, playerMark, 4, true);
+    }
 
-        Set<String> foundThreats = new HashSet<>();
+    /**
+     * Counts unique "four" threats. A four is an arrangement of 4 stones
+     * that can become a winning five-in-a-row in one move.
+     */
+    public int countFours(Mark[][] board, Mark playerMark) {
+        return countThreats(board, playerMark, 5, false);
+    }
+
+    /**
+     * A generic method to count threats of a certain type by checking every possible move.
+     */
+    private int countThreats(Mark[][] board, Mark playerMark, int targetLength, boolean checkOpenEnds) {
+        if (board == null || playerMark == Mark.NULL) return 0;
+
+        Set<String> foundThreatKeys = new HashSet<>();
         int n = board.length;
 
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < n; c++) {
                 if (board[r][c] == Mark.NULL) {
-                    board[r][c] = playerMark; // Temporarily place the mark
-
-                    // Check if this move created an open four
-                    if (isCreatingOpenFour(board, playerMark, r, c)) {
-                        // It did. Now, find the 3 stones that made this possible.
-                        String canonicalKey = getThreatKey(board, playerMark, r, c);
-                        if (canonicalKey != null) {
-                            foundThreats.add(canonicalKey);
-                        }
-                    }
-                    board[r][c] = Mark.NULL; // Backtrack
+                    // This helper will check all directions for the move (r,c)
+                    // and add any found threat keys to the set.
+                    addCreatedThreatsToSet(foundThreatKeys, board, playerMark, r, c, targetLength, checkOpenEnds);
                 }
             }
         }
-        return foundThreats.size();
+        return foundThreatKeys.size();
     }
 
     /**
-     * Finds the three existing stones that, combined with the new stone at (r,c),
-     * created an open four, and returns their canonical key.
+     * Checks a single potential move at (r,c) and adds the canonical keys of any
+     * threats it creates to the provided set.
      */
-    private String getThreatKey(Mark[][] board, Mark playerMark, int r, int c) {
+    private void addCreatedThreatsToSet(Set<String> keys, Mark[][] board, Mark playerMark, int r, int c, int targetLength, boolean checkOpenEnds) {
+        board[r][c] = playerMark; // Temporarily place the stone
+
         for (int[] dir : DIRECTIONS) {
-            List<Position> stones = new ArrayList<>();
-            stones.add(new Position(c, r)); // Add the new stone
+            int dr = dir[0], dc = dir[1];
+            int pos = countDirection(board, playerMark, r, c, dr, dc);
+            int neg = countDirection(board, playerMark, r, c, -dr, -dc);
 
-            // Check forward
-            for (int i = 1; i <= 4; i++) {
-                if (adapter.get(board, r + i * dir[0], c + i * dir[1]) == playerMark) {
-                    stones.add(new Position(c + i * dir[1], r + i * dir[0]));
-                }
-            }
-            // Check backward
-            for (int i = 1; i <= 4; i++) {
-                if (adapter.get(board, r - i * dir[0], c - i * dir[1]) == playerMark) {
-                    stones.add(new Position(c - i * dir[1], r - i * dir[0]));
-                }
-            }
+            // Check if a line of the target length was formed
+            if (1 + pos + neg == targetLength) {
+                boolean endsAreValid = !checkOpenEnds; // If we don't need to check, ends are valid.
 
-            // We should have found 4 stones in total that form the line.
-            // We want the key for the 3 original stones.
-            if (stones.size() == 4) {
-                stones.remove(new Position(c, r)); // Remove the new stone to get the original 3
-                return canonicalize(stones);
+                if (checkOpenEnds) {
+                    int frontR = r + (pos + 1) * dr;
+                    int frontC = c + (pos + 1) * dc;
+                    int backR = r - (neg + 1) * dr;
+                    int backC = c - (neg + 1) * dc;
+                    if (adapter.isOnBoard(board, frontR, frontC) && adapter.get(board, frontR, frontC) == Mark.NULL &&
+                            adapter.isOnBoard(board, backR, backC) && adapter.get(board, backR, backC) == Mark.NULL) {
+                        endsAreValid = true;
+                    }
+                }
+
+                if (endsAreValid) {
+                    // A valid threat was found. Collect the ORIGINAL stones.
+                    List<Position> originalStones = new ArrayList<>();
+                    for (int i = 1; i <= neg; i++) {
+                        originalStones.add(new Position(c - i * dc, r - i * dr));
+                    }
+                    for (int i = 1; i <= pos; i++) {
+                        originalStones.add(new Position(c + i * dc, r + i * dr));
+                    }
+                    keys.add(canonicalize(originalStones));
+                }
             }
         }
-        return null; // Should not happen if isCreatingOpenFour was true
+        board[r][c] = Mark.NULL; // Backtrack
     }
 
-    /**
-     * Creates a sorted, unique string key for a list of positions.
-     */
     private String canonicalize(List<Position> positions) {
+        // This sorting is critical for generating a unique key for a set of stones
         positions.sort(Comparator.comparingInt(Position::row).thenComparingInt(Position::col));
         return positions.stream()
                 .map(p -> p.row() + "," + p.col())
                 .collect(Collectors.joining(";"));
     }
 
-    private boolean isCreatingOpenFour(Mark[][] board, Mark playerMark, int r, int c) {
-        for (int[] dir : DIRECTIONS) {
-            int dr = dir[0], dc = dir[1];
-            int pos = countDirection(board, playerMark, r, c, dr, dc);
-            int neg = countDirection(board, playerMark, r, c, -dr, -dc);
-            int total = 1 + pos + neg;
-
-            if (total == 4) {
-                int frontR = r + (pos + 1) * dr;
-                int frontC = c + (pos + 1) * dc;
-                int backR = r - (neg + 1) * dr;
-                int backC = c - (neg + 1) * dc;
-
-                if (adapter.isOnBoard(board, frontR, frontC) && adapter.get(board, frontR, frontC) == Mark.NULL &&
-                        adapter.isOnBoard(board, backR, backC) && adapter.get(board, backR, backC) == Mark.NULL) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     private int countDirection(Mark[][] board, Mark me, int r, int c, int dr, int dc) {
         int count = 0;
         int rr = r + dr;
         int cc = c + dc;
-        while (adapter.get(board, rr, cc) == me) {
-            count++;
-            rr += dr;
-            cc += dc;
+        for (int i = 0; i < board.length; i++) {
+            if (adapter.get(board, rr, cc) == me) {
+                count++;
+                rr += dr;
+                cc += dc;
+            } else {
+                break;
+            }
         }
         return count;
     }

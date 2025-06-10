@@ -616,7 +616,7 @@ class FinalTest {
             @Test
             void crossWithClosedEnd() throws TheWinnerIsException, ResignException, WrongBoardStateException {
                 String board = """
-                        O . . . . . . . . .
+                        . . . . . . . . . .
                         . X . X . . . . . .
                         . . . . . . . . . O
                         . X . X . . . . . O
@@ -624,7 +624,7 @@ class FinalTest {
                         . . . . . . . . . .
                         . . . . . . . . . .
                         . . . . . . . . . .
-                        . . . . . . . . . .
+                        . . . O . . . . . .
                         . . . . . . . . . .
                         """;
                 Mark firstMark = Mark.NOUGHT;
@@ -640,7 +640,7 @@ class FinalTest {
                     gomoku.periodicBoundaryConditionsInUse();
                 }
                 Move move = gomoku.nextMove(moves, nextMoveMark);
-                assertEquals(new Move(new Position(9, 4), Mark.CROSS), move);
+                assertEquals(new Move(new Position(2, 2), Mark.CROSS), move);
             }
         }
 
