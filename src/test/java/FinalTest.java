@@ -767,7 +767,7 @@ class FinalTest {
                 assertTrue(
                         move.equals(new Move(new Position(2, 8), Mark.CROSS)) ||
                                 move.equals(new Move(new Position(2, 4), Mark.CROSS)),
-                        "Ruch powinien być jednym z dwóch oczekiwanych ruchów"
+                        "The move should be one of two expected moves"
                 );
 
             }
@@ -1199,7 +1199,6 @@ class FinalTest {
         @Test
         void BestAttack() throws TheWinnerIsException, ResignException, WrongBoardStateException
         {
-
             String board = """
                 . . . . . . . . . .
                 . . . . . . . . . .
@@ -1225,8 +1224,6 @@ class FinalTest {
             {
                 gomoku.periodicBoundaryConditionsInUse();
             }
-
-            //Move move = gomoku.nextMove(moves, nextMoveMark);
 
             Move move = gomoku.nextMove(moves, nextMoveMark);
 
