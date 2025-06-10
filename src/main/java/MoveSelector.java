@@ -8,16 +8,14 @@ public class MoveSelector {
 
     public MoveSelector(BoundaryAdapter adapter) {
         // Create strategies with injected adapter
-        ImmediateWinStrategy s1 = new ImmediateWinStrategy(adapter);
         BlockStrategy s2 = new BlockStrategy(adapter);
         OpenFourStrategy s3 = new OpenFourStrategy(adapter);
         DoubleThreatStrategy s4 = new DoubleThreatStrategy(adapter);
 
-        s1.setNext(s2);
         s2.setNext(s3);
         s3.setNext(s4);
 
-        this.chain = s1;
+        this.chain = s2;
     }
 
     public Move decide(Mark[][] board, Mark me) throws ResignException {

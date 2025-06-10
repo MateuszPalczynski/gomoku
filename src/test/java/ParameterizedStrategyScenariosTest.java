@@ -1027,6 +1027,40 @@ class ParameterizedStrategyScenariosTest {
                         }, Mark.NOUGHT,
                         null,
                         ResignException.class,
+                        null),
+
+                // 62. 4 x 2
+                Arguments.of(new String[]{
+                                "..........",
+                                ".........o",
+                                ".........o",
+                                ".........o",
+                                ".........o",
+                                "..x.......",
+                                "...x......",
+                                "..........",
+                                ".....x....",
+                                "......x..."
+                        }, Mark.CROSS,
+                        new Position(4, 7),
+                        null,
+                        null),
+
+                // 62. 4 x 2 v2
+                Arguments.of(new String[]{
+                                "..........",
+                                ".........o",
+                                ".........o",
+                                ".........o",
+                                ".........o",
+                                "..........",
+                                "...x......",
+                                "....x.....",
+                                ".....x....",
+                                "......x..."
+                        }, Mark.CROSS,
+                        new Position(2, 5),
+                        null,
                         null)
         );
     }

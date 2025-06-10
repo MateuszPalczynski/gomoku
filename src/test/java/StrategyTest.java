@@ -8,21 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 public class StrategyTest {
-    private static final int SIZE = 5;
+    private static final int SIZE = 10;
     private final BoundaryAdapter boundedAdapter = new BoundedAdapter();
-
-    @Test
-    public void testImmediateWin() throws Exception {
-        Mark[][] board = BoardModel.fromMoves(SIZE, Set.of(
-                new Move(new Position(0,0), Mark.CROSS),
-                new Move(new Position(1,0), Mark.CROSS),
-                new Move(new Position(2,0), Mark.CROSS),
-                new Move(new Position(3,0), Mark.CROSS)
-        ));
-        // Pass adapter to MoveSelector
-        Move m = new MoveSelector(boundedAdapter).decide(board, Mark.CROSS);
-        assertEquals(new Position(4,0), m.position());
-    }
 
     @Test
     public void testBlock() throws Exception {

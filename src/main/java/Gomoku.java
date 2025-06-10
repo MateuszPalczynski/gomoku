@@ -73,7 +73,7 @@ public class Gomoku implements Game {
         // 0) Build current board
         Mark[][] board = BoardModel.fromMoves(size, boardState);
 
-        // 1) Full board => WrongBoardStateException
+        // 1) Full board => Resign
         if (boardState.size() >= size * size) {
             throw new ResignException();
         }
@@ -81,14 +81,29 @@ public class Gomoku implements Game {
         // 2) Validate state (existing winner or wrong turn)
         validator.validate(size, boardState, nextMoveMark);
 
+        // 3) IMMEDIATE WIN CHECK FOR US (MOVED UP)
+        WinDetector ourWinDet = new WinDetector(adapter);
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c < size; c++) {
+                if (board[r][c] == Mark.NULL) {
+                    board[r][c] = nextMoveMark;
+                    if (ourWinDet.hasWinner(board)) {
+                        board[r][c] = Mark.NULL;
+                        return new Move(new Position(c, r), nextMoveMark);
+                    }
+                    board[r][c] = Mark.NULL;
+                }
+            }
+        }
+
         Mark opponent = (nextMoveMark == Mark.CROSS ? Mark.NOUGHT : Mark.CROSS);
 
-        // 3) Opponent double open-three => resign
+        // 4) Opponent double open-three => resign (MOVED DOWN)
         if (threatDetector.countOpenThrees(board, opponent) >= 2) {
             throw new ResignException();
         }
 
-        // 4) Opponent multiple immediate wins => resign
+        // 5) Opponent multiple immediate wins => resign (MOVED DOWN)
         WinDetector oppWinDet = new WinDetector(adapter);
         int oppWins = 0;
         for (int r = 0; r < size && oppWins <= 1; r++) {
@@ -104,21 +119,6 @@ public class Gomoku implements Game {
         }
         if (oppWins > 1) {
             throw new ResignException();
-        }
-
-        // 5) Immediate win for us
-        WinDetector ourWinDet = new WinDetector(adapter);
-        for (int r = 0; r < size; r++) {
-            for (int c = 0; c < size; c++) {
-                if (board[r][c] == Mark.NULL) {
-                    board[r][c] = nextMoveMark;
-                    if (ourWinDet.hasWinner(board)) {
-                        board[r][c] = Mark.NULL;
-                        return new Move(new Position(c, r), nextMoveMark);
-                    }
-                    board[r][c] = Mark.NULL;
-                }
-            }
         }
 
         // 6) Delegate to strategy chain
