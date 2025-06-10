@@ -32,4 +32,17 @@ public abstract class AbstractStrategy implements Strategy {
     }
 
     protected abstract Move findMove(Mark[][] board, Mark me);
+
+    /** Zlicza kolejno pionki kierunku (dr,dc). */
+    protected int countDirection(Mark[][] board, Mark me, int r, int c, int dr, int dc) {
+        int count = 0;
+        int rr = r + dr;
+        int cc = c + dc;
+        while (adapter.get(board, rr, cc) == me) {
+            count++;
+            rr += dr;
+            cc += dc;
+        }
+        return count;
+    }
 }

@@ -45,16 +45,4 @@ public class DoubleThreatStrategy extends AbstractStrategy {
         }
         return null;
     }
-
-    /** Zlicza kolejne pionki w kierunku (dr,dc). */
-    private int countDirection(Mark[][] board, Mark me, int r, int c, int dr, int dc) {
-        int count = 0;
-        int rr = r + dr, cc = c + dc;
-        while (adapter.get(board, rr, cc) == me) {
-            count++;
-            rr += dr;
-            cc += dc;
-        }
-        return count;
-    }
 }
