@@ -98,12 +98,12 @@ public class Gomoku implements Game {
 
         Mark opponent = (nextMoveMark == Mark.CROSS ? Mark.NOUGHT : Mark.CROSS);
 
-        // 4) Opponent double open-three => resign (MOVED DOWN)
+        // 4) Opponent double open-three => resign
         if (threatDetector.countOpenThrees(board, opponent) >= 2) {
             throw new ResignException();
         }
 
-        // 5) Opponent multiple immediate wins => resign (MOVED DOWN)
+        // 5) Opponent multiple immediate wins => resign
         WinDetector oppWinDet = new WinDetector(adapter);
         int oppWins = 0;
         for (int r = 0; r < size && oppWins <= 1; r++) {

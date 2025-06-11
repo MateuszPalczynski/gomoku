@@ -1046,7 +1046,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 62. 4 x 2 v2
+                // 63. 4 x 2 v2
                 Arguments.of(new String[]{
                                 "..........",
                                 ".........o",
@@ -1063,7 +1063,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 63. Brak miejsca
+                // 64. Brak miejsca
                 Arguments.of(new String[]{
                                 "...xx.....",
                                 ".........o",
@@ -1080,7 +1080,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 64.
+                // 65.
                 Arguments.of(new String[]{
                                 "..........",
                                 ".........o",
@@ -1097,7 +1097,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 65.
+                // 66.
                 Arguments.of(new String[]{
                                 "..........",
                                 ".........o",
@@ -1114,7 +1114,7 @@ class ParameterizedStrategyScenariosTest {
                         null,
                         null),
 
-                // 66.
+                // 67.
                 Arguments.of(new String[]{
                                 "..........",
                                 ".........o",
@@ -1128,6 +1128,57 @@ class ParameterizedStrategyScenariosTest {
                                 ".........."
                         }, Mark.CROSS,
                         new Position(4, 6),
+                        null,
+                        null),
+
+                // 68. Obrona przed 2x3
+                Arguments.of(new String[]{
+                                "..........",
+                                "......o...",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "oo........",
+                                "........x.",
+                                ".......x..",
+                                "....xx....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(6, 8),
+                        null,
+                        null),
+
+                // 69. Obrona przed 2x3
+                Arguments.of(new String[]{
+                                "..........",
+                                "......o...",
+                                "..........",
+                                "..........",
+                                "..........",
+                                "oo........",
+                                "......x...",
+                                "......x...",
+                                "....xx....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(6, 8),
+                        null,
+                        null),
+
+                // 70. Obrona przed 2x3
+                Arguments.of(new String[]{
+                                "..........",
+                                "..........",
+                                "......o...",
+                                "..........",
+                                "..........",
+                                "oo........",
+                                ".....x....",
+                                "....x.x...",
+                                ".....x....",
+                                ".........."
+                        }, Mark.NOUGHT,
+                        new Position(5, 7),
                         null,
                         null)
         );

@@ -13,10 +13,13 @@ public class MoveSelector {
         Strategy s3 = new OpenFourStrategy(adapter);
         Strategy s4 = new BlockOpenFourStrategy(adapter);
         Strategy s5 = new DoubleThreatStrategy(adapter);
+        Strategy s6 = new BlockDoubleThreatStrategy(adapter);
 
+        // Set the new chain of command
         s2.setNext(s3);
         s3.setNext(s4);
         s4.setNext(s5);
+        s5.setNext(s6);
 
         this.chain = s2;
     }
