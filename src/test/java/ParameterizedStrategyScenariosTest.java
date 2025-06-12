@@ -1194,7 +1194,7 @@ class ParameterizedStrategyScenariosTest {
                                 ".......x..",
                                 "....xxx...",
                                 ".........."
-                        }, Mark.CROSS,
+                        }, Mark.NOUGHT,
                         new Position(2, 3),
                         null,
                         null)

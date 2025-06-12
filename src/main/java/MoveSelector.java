@@ -8,9 +8,9 @@ public class MoveSelector {
 
     public MoveSelector(BoundaryAdapter adapter, ThreatDetector threatDetector) {
         // Create strategies with injected adapter
-        Strategy s1 = new ForcedDefenseStrategy(adapter, threatDetector);
-        Strategy s2 = new BlockWinStrategy(adapter);
-        Strategy s3 = new OpenFourStrategy(adapter);
+        Strategy s1 = new FindForcedWinStrategy(adapter);
+        Strategy s2 = new ForcedDefenseStrategy(adapter, threatDetector);
+        Strategy s3 = new BlockWinStrategy(adapter);
         Strategy s4 = new BlockOpenFourStrategy(adapter);
         Strategy s5 = new DoubleThreatStrategy(adapter);
         Strategy s6 = new BlockDoubleThreatStrategy(adapter);
