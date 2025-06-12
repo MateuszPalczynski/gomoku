@@ -37,12 +37,21 @@ public abstract class AbstractStrategy implements Strategy {
     /** Zlicza kolejno pionki kierunku (dr,dc). */
     protected int countDirection(Mark[][] board, Mark me, int r, int c, int dr, int dc) {
         int count = 0;
+        int n = board.length; // Get the board size
         int rr = r + dr;
         int cc = c + dc;
-        while (adapter.get(board, rr, cc) == me) {
-            count++;
-            rr += dr;
-            cc += dc;
+
+        // The 'for' loop prevents us from checking more than 'n' cells,
+        // which is the maximum possible length of a line, avoiding infinite loops.
+        for (int i = 0; i < n; i++) {
+            if (adapter.get(board, rr, cc) == me) {
+                count++;
+                rr += dr;
+                cc += dc;
+            } else {
+                // As soon as the line is broken, we stop.
+                break;
+            }
         }
         return count;
     }
