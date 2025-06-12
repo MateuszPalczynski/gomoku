@@ -77,7 +77,7 @@ public class Gomoku implements Game {
 
         // 1) Full board => Resign
         if (boardState.size() >= size * size) {
-            throw new ResignException();
+            throw new WrongBoardStateException();
         }
 
         // 2) Validate state (existing winner or wrong turn)
