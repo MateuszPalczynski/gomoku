@@ -14,6 +14,7 @@ public abstract class AbstractStrategy implements Strategy {
         this.adapter = adapter;
     }
 
+
     @Override
     public void setNext(Strategy next) {
         this.next = next;
@@ -31,7 +32,7 @@ public abstract class AbstractStrategy implements Strategy {
         }
     }
 
-    protected abstract Move findMove(Mark[][] board, Mark me);
+    protected abstract Move findMove(Mark[][] board, Mark me) throws ResignException;
 
     /** Zlicza kolejno pionki kierunku (dr,dc). */
     protected int countDirection(Mark[][] board, Mark me, int r, int c, int dr, int dc) {
