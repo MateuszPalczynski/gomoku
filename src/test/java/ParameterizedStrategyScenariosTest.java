@@ -1180,6 +1180,23 @@ class ParameterizedStrategyScenariosTest {
                         }, Mark.NOUGHT,
                         new Position(5, 7),
                         null,
+                        null),
+
+                // 71.
+                Arguments.of(new String[]{
+                                ".........o",
+                                "..........",
+                                "..........",
+                                "...ooo....",
+                                "..........",
+                                "..........",
+                                "........x.",
+                                ".......x..",
+                                "....xxx...",
+                                ".........."
+                        }, Mark.CROSS,
+                        new Position(2, 3),
+                        null,
                         null)
         );
     }
