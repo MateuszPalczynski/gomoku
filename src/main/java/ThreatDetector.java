@@ -162,4 +162,136 @@ public class ThreatDetector {
         }
         return count;
     }
+
+    public Set<Position> findOpenFourMoves(Mark[][] board, Mark playerMark) {
+        if (board == null || playerMark == Mark.NULL) {
+            return Collections.emptySet();
+        }
+
+        Set<Position> threateningMoves = new HashSet<>();
+        int n = board.length;
+
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < n; c++) {
+                if (board[r][c] == Mark.NULL) {
+                    // Temporarily make the move
+                    board[r][c] = playerMark;
+
+                    // Check if this move created an open four
+                    for (int[] dir : DIRECTIONS) {
+                        int dr = dir[0], dc = dir[1];
+                        // Check backwards from the new stone
+                        int neg = countDirection(board, playerMark, r, c, -dr, -dc);
+                        // Check forwards from the new stone
+                        int pos = countDirection(board, playerMark, r, c, dr, dc);
+
+                        // A line of 4 (_XXXX_) is formed if the new stone is part of a 4-in-a-row
+                        // with open ends.
+                        // We check all possible sub-segments of length 4 that include the new stone.
+                        for (int i = 0; i <= 3; i++) {
+                            int startOffset = -i;
+                            int endOffset = 3 - i;
+
+                            // Check if the segment is composed of 4 of our stones
+                            // The segment is from (r + startOffset*dr) to (r + endOffset*dr)
+                            int r_start = r + startOffset * dr;
+                            int c_start = c + startOffset * dc;
+
+                            // We need to verify that all 4 positions in this window are `playerMark`
+                            boolean isSolidFour = true;
+                            for(int k=0; k<4; k++){
+                                if(adapter.get(board, r_start + k*dr, c_start + k*dc) != playerMark){
+                                    isSolidFour = false;
+                                    break;
+                                }
+                            }
+
+                            if(isSolidFour){
+                                // Now check if the ends are open
+                                int frontR = r_start + 4 * dr;
+                                int frontC = c_start + 4 * dc;
+                                int backR = r_start - 1 * dr;
+                                int backC = c_start - 1 * dc;
+
+                                if (adapter.get(board, frontR, frontC) == Mark.NULL &&
+                                        adapter.get(board, backR, backC) == Mark.NULL) {
+                                    threateningMoves.add(new Position(c, r));
+                                    break; // Found a threat in this direction, move to the next direction
+                                }
+                            }
+                        }
+                        if (threateningMoves.contains(new Position(c, r))) {
+                            break; // Move to next direction
+                        }
+                    }
+                    // Backtrack
+                    board[r][c] = Mark.NULL;
+                }
+            }
+        }
+        return threateningMoves;
+    }
+
+
+    /**
+     * Checks if the given player has a guaranteed win on their next turn.
+     * A guaranteed win is defined as either:
+     * 1. An immediate winning move (creates 5-in-a-row).
+     * 2. A move that creates an "open four" (_XXXX_), which is unblockable.
+     *
+     * @param board      The current game board.
+     * @param playerMark The player to check.
+     * @return True if a forced win exists, false otherwise.
+     */
+    public boolean hasForcedWin(Mark[][] board, Mark playerMark) {
+        int n = board.length;
+        // Check for any move that results in a win or an open four
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < n; c++) {
+                if (board[r][c] == Mark.NULL) {
+                    // Temporarily make the move
+                    board[r][c] = playerMark;
+
+                    // 1. Did this move win the game?
+                    WinDetector winDetector = new WinDetector(adapter);
+                    if (winDetector.hasWinner(board)) {
+                        board[r][c] = Mark.NULL; // Backtrack
+                        return true; // Found an immediate winning move
+                    }
+
+                    // 2. Did this move create an "open four"?
+                    // (Using a simplified check here for clarity, can reuse findOpenFourMoves logic)
+                    for (int[] dir : DIRECTIONS) {
+                        int dr = dir[0], dc = dir[1];
+                        int consecutive = 1 + countDirection(board, playerMark, r, c, dr, dc) + countDirection(board, playerMark, r, c, -dr, -dc);
+
+                        if (consecutive >= 5) { // This case is caught by WinDetector above
+                            continue;
+                        }
+
+                        if (consecutive == 4) {
+                            // We have a line of 4. Check if it's open.
+                            // Find the two ends of the line of 4.
+                            int count_fwd = countDirection(board, playerMark, r, c, dr, dc);
+                            int r_end1 = r + (count_fwd + 1) * dr;
+                            int c_end1 = c + (count_fwd + 1) * dc;
+
+                            int count_bwd = countDirection(board, playerMark, r, c, -dr, -dc);
+                            int r_end2 = r - (count_bwd + 1) * dr;
+                            int c_end2 = c - (count_bwd + 1) * dc;
+
+                            if (adapter.get(board, r_end1, c_end1) == Mark.NULL && adapter.get(board, r_end2, c_end2) == Mark.NULL) {
+                                board[r][c] = Mark.NULL; // Backtrack
+                                return true; // Found a move that creates an open four
+                            }
+                        }
+                    }
+
+                    // Backtrack
+                    board[r][c] = Mark.NULL;
+                }
+            }
+        }
+        return false; // No forced win found
+    }
 }
