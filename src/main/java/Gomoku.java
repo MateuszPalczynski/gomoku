@@ -82,6 +82,7 @@ public class Gomoku implements Game {
         validator.validate(size, boardState, nextMoveMark);
 
         // 3) IMMEDIATE WIN CHECK FOR US (MOVED UP)
+        // This is the highest priority. If we can win, we do it.
         WinDetector ourWinDet = new WinDetector(adapter);
         for (int r = 0; r < size; r++) {
             for (int c = 0; c < size; c++) {
@@ -98,12 +99,15 @@ public class Gomoku implements Game {
 
         Mark opponent = (nextMoveMark == Mark.CROSS ? Mark.NOUGHT : Mark.CROSS);
 
-        // 4) Opponent double open-three => resign
-        if (threatDetector.countOpenThrees(board, opponent) >= 2) {
+        // 4) FINAL CORRECTED RESIGN LOGIC
+        int openThreeThreats = threatDetector.countOpenThrees(board, opponent);
+        //int fourThreats = threatDetector.countFours(board, opponent);
+        //int potentialThreeThreats = threatDetector.countDoubleThreeThreats(board, opponent);
+        if (openThreeThreats>= 2) {
             throw new ResignException();
         }
 
-        // 5) Opponent multiple immediate wins => resign
+        // 5) Opponent multiple immediate wins => resign (another resign condition)
         WinDetector oppWinDet = new WinDetector(adapter);
         int oppWins = 0;
         for (int r = 0; r < size && oppWins <= 1; r++) {

@@ -35,6 +35,50 @@ public class ThreatDetector {
         return countThreats(board, playerMark, 5, false);
     }
 
+    public int countDoubleThreeThreats(Mark[][] board, Mark playerMark) {
+        if (board == null || playerMark == Mark.NULL) return 0;
+
+        int doubleThreeMoveCount = 0;
+        int n = board.length;
+
+        // Iterate over every empty cell to see if playing there creates a double three
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < n; c++) {
+                if (board[r][c] == Mark.NULL) {
+
+                    board[r][c] = playerMark; // Temporarily place the stone
+
+                    int openThreesCreated = 0;
+                    // For this one move, check in all 4 directions how many open threes were formed
+                    for (int[] dir : DIRECTIONS) {
+                        int dr = dir[0], dc = dir[1];
+                        int pos = countDirection(board, playerMark, r, c, dr, dc);
+                        int neg = countDirection(board, playerMark, r, c, -dr, -dc);
+
+                        // Check for an open line of THREE: .XXX.
+                        if (1 + pos + neg == 3) {
+                            int frontR = r + (pos + 1) * dr;
+                            int frontC = c + (pos + 1) * dc;
+                            int backR = r - (neg + 1) * dr;
+                            int backC = c - (neg + 1) * dc;
+
+                            if (adapter.isOnBoard(board, frontR, frontC) && adapter.get(board, frontR, frontC) == Mark.NULL &&
+                                    adapter.isOnBoard(board, backR, backC) && adapter.get(board, backR, backC) == Mark.NULL) {
+                                openThreesCreated++;
+                            }
+                        }
+                    }
+
+                    board[r][c] = Mark.NULL; // Backtrack
+
+                    if (openThreesCreated >= 2) {
+                        doubleThreeMoveCount++;
+                    }
+                }
+            }
+        }
+        return doubleThreeMoveCount;
+    }
     /**
      * A generic method to count threats of a certain type by checking every possible move.
      */
@@ -111,14 +155,10 @@ public class ThreatDetector {
         int count = 0;
         int rr = r + dr;
         int cc = c + dc;
-        for (int i = 0; i < board.length; i++) {
-            if (adapter.get(board, rr, cc) == me) {
-                count++;
-                rr += dr;
-                cc += dc;
-            } else {
-                break;
-            }
+        while (adapter.get(board, rr, cc) == me) {
+            count++;
+            rr += dr;
+            cc += dc;
         }
         return count;
     }
