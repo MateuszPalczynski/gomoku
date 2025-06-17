@@ -8,13 +8,13 @@ import java.util.Set;
 public class StrategyTest {
     private static final int SIZE = 10;
     private BoundaryAdapter boundedAdapter;
-    private ThreatDetector threatDetector;
+    private ThreatAssessor threatAssessor;
 
     // It's good practice to set up common objects here
     @BeforeEach
     public void setUp() {
         this.boundedAdapter = new BoundedAdapter();
-        this.threatDetector = new ThreatDetector(boundedAdapter, SIZE);
+        this.threatAssessor = new ThreatAssessor(boundedAdapter, SIZE);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class StrategyTest {
         ));
 
         // CORRECTED: Pass both the adapter and the threat detector
-        MoveSelector selector = new MoveSelector(boundedAdapter, threatDetector);
+        MoveSelector selector = new MoveSelector(boundedAdapter, threatAssessor);
         Move m = selector.decide(board, Mark.CROSS);
 
         assertEquals(new Position(4, 1), m.position());
@@ -43,7 +43,7 @@ public class StrategyTest {
         }
 
         // CORRECTED: Pass both the adapter and the threat detector
-        MoveSelector selector = new MoveSelector(boundedAdapter, threatDetector);
+        MoveSelector selector = new MoveSelector(boundedAdapter, threatAssessor);
 
         assertThrows(ResignException.class,
                 () -> selector.decide(board, Mark.CROSS));

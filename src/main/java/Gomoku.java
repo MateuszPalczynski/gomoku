@@ -1,6 +1,5 @@
 import fais.zti.oramus.gomoku.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Gomoku implements Game {
@@ -11,11 +10,7 @@ public class Gomoku implements Game {
     private BoundaryAdapter adapter;
     private BoardValidator validator;
     private MoveSelector selector;
-    private ThreatDetector threatDetector;
 
-    /**
-     * Public no-arg constructor: uses defaults (15×15, CROSS, bounded).
-     */
     public Gomoku() {
         this.size = 10;
         this.firstMark = Mark.CROSS;
@@ -23,9 +18,6 @@ public class Gomoku implements Game {
         reinit();
     }
 
-    /**
-     * Internal constructor used by GomokuBuilder.
-     */
     public Gomoku(int size, Mark firstMark, boolean periodic) {
         this.size = size;
         this.firstMark = firstMark;
@@ -57,16 +49,13 @@ public class Gomoku implements Game {
         reinit();
     }
 
-    /**
-     * Reinitialize boundary adapter, validator, selector, and threat detector whenever config changes.
-     */
     private void reinit() {
         this.adapter = periodic
                 ? new PeriodicBoundaryAdapter()
                 : new BoundedAdapter();
         this.validator = new BoardValidator(adapter, firstMark);
-        this.threatDetector = new ThreatDetector(adapter, size);
-        this.selector = new MoveSelector(adapter, this.threatDetector);
+        ThreatAssessor threatAssessor = new ThreatAssessor(adapter, size);
+        this.selector = new MoveSelector(adapter, threatAssessor);
 
     }
 
@@ -76,16 +65,15 @@ public class Gomoku implements Game {
         // 0) Build current board
         Mark[][] board = BoardModel.fromMoves(size, boardState);
 
-        // 1) Full board => Resign
+        // 1) Full board => WrongBoardStateException
         if (boardState.size() >= size * size) {
             throw new WrongBoardStateException();
         }
 
-        // 2) Validate state (existing winner or wrong turn)
+        // 2) Validate state
         validator.validate(size, boardState, nextMoveMark);
 
-        // 3) IMMEDIATE WIN CHECK FOR US (MOVED UP)
-        // This is the highest priority. If we can win, we do it.
+        // 3) Immediate win check for us
         WinDetector ourWinDet = new WinDetector(adapter);
         for (int r = 0; r < size; r++) {
             for (int c = 0; c < size; c++) {
@@ -100,7 +88,7 @@ public class Gomoku implements Game {
             }
         }
 
-        // 6) Delegate to strategy chain
+        // 4) Delegate to strategy chain
         return selector.decide(board, nextMoveMark);
     }
 }

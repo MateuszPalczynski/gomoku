@@ -14,7 +14,6 @@ public abstract class AbstractStrategy implements Strategy {
         this.adapter = adapter;
     }
 
-
     @Override
     public void setNext(Strategy next) {
         this.next = next;
@@ -34,22 +33,18 @@ public abstract class AbstractStrategy implements Strategy {
 
     protected abstract Move findMove(Mark[][] board, Mark me) throws ResignException;
 
-    /** Zlicza kolejno pionki kierunku (dr,dc). */
     protected int countDirection(Mark[][] board, Mark me, int r, int c, int dr, int dc) {
         int count = 0;
-        int n = board.length; // Get the board size
+        int n = board.length;
         int rr = r + dr;
         int cc = c + dc;
 
-        // The 'for' loop prevents us from checking more than 'n' cells,
-        // which is the maximum possible length of a line, avoiding infinite loops.
         for (int i = 0; i < n; i++) {
             if (adapter.get(board, rr, cc) == me) {
                 count++;
                 rr += dr;
                 cc += dc;
             } else {
-                // As soon as the line is broken, we stop.
                 break;
             }
         }

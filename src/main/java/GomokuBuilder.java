@@ -1,7 +1,5 @@
 import fais.zti.oramus.gomoku.Mark;
-/**
- * Budowniczy konfiguracji gry Gomoku.
- */
+
 public class GomokuBuilder {
     private int size = 10;
     private Mark first = Mark.CROSS;

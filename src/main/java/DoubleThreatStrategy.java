@@ -2,11 +2,7 @@ import fais.zti.oramus.gomoku.Mark;
 import fais.zti.oramus.gomoku.Move;
 import fais.zti.oramus.gomoku.Position;
 
-/** Tworzy podwójne zagrożenie – dwa otwarte trójki. */
 public class DoubleThreatStrategy extends AbstractStrategy {
-    public DoubleThreatStrategy() {
-        super();
-    }
 
     public DoubleThreatStrategy(BoundaryAdapter adapter) {
         super(adapter);

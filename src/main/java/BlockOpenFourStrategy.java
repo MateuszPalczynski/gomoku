@@ -1,8 +1,5 @@
 import fais.zti.oramus.gomoku.*;
 
-/**
- * Strategy to block the opponent from creating an "open four" threat.
- */
 public class BlockOpenFourStrategy extends AbstractStrategy {
 
     private static final int[][] DIRECTIONS = {{0,1},{1,0},{1,1},{1,-1}};
@@ -19,7 +16,6 @@ public class BlockOpenFourStrategy extends AbstractStrategy {
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < n; c++) {
                 if (adapter.get(board, r, c) == Mark.NULL) {
-                    // If opponent plays here, do they create an open four?
                     board[r][c] = opponent;
                     boolean createdOpen4 = false;
                     for (int[] dir : DIRECTIONS) {
@@ -40,7 +36,7 @@ public class BlockOpenFourStrategy extends AbstractStrategy {
                             }
                         }
                     }
-                    board[r][c] = Mark.NULL; // backtrack
+                    board[r][c] = Mark.NULL;
                     if (createdOpen4) {
                         return new Move(new Position(c, r), me);
                     }
