@@ -1,94 +1,94 @@
 import fais.zti.oramus.gomoku.*;
+
 import java.util.Set;
 
 public class Gomoku implements Game {
-    private final int size;
-    private final Mark firstMark;
-    private final BoundaryAdapter adapter;
-    private final BoardValidator validator;
-    private final MoveSelector selector;
+    private int size;
+    private Mark firstMark;
+    private boolean periodic;
+
+    private BoundaryAdapter adapter;
+    private BoardValidator validator;
+    private MoveSelector selector;
+
+    public Gomoku() {
+        this.size = 10;
+        this.firstMark = Mark.CROSS;
+        this.periodic = false;
+        reinit();
+    }
+
+    public Gomoku(int size, Mark firstMark, boolean periodic) {
+        this.size = size;
+        this.firstMark = firstMark;
+        this.periodic = periodic;
+        reinit();
+    }
 
     @Override
     public void firstMark(Mark first) {
-        // Implementation not needed since firstMark is set in constructor
+        if (first == null) {
+            throw new IllegalArgumentException("First mark cannot be null");
+        }
+        this.firstMark = first;
+        reinit();
     }
 
     @Override
     public void size(int size) {
-        // Implementation not needed since size is set in constructor
+        if (size < 10 || size > 15) {
+            throw new IllegalArgumentException("Size must be between 10 and 15 (inclusive)");
+        }
+        this.size = size;
+        reinit();
     }
 
     @Override
     public void periodicBoundaryConditionsInUse() {
-        // Implementation not needed since boundary type is set in constructor
+        this.periodic = true;
+        reinit();
     }
 
-    Gomoku(int size, Mark firstMark, boolean periodic) {
-        this.size = size;
-        this.firstMark = firstMark;
+    private void reinit() {
         this.adapter = periodic
                 ? new PeriodicBoundaryAdapter()
                 : new BoundedAdapter();
-        this.validator = new BoardValidator(adapter);
-        this.selector = new MoveSelector(adapter);  // Pass adapter to selector
-    }
+        this.validator = new BoardValidator(adapter, firstMark);
+        ThreatAssessor threatAssessor = new ThreatAssessor(adapter, size);
+        this.selector = new MoveSelector(adapter, threatAssessor);
 
-    /**
-     * Publiczny konstruktor bezparametrowy z domyślną konfiguracją.
-     */
-    public Gomoku() {
-        this(15, Mark.CROSS, false);
     }
 
     @Override
     public Move nextMove(Set<Move> boardState, Mark nextMoveMark)
             throws ResignException, TheWinnerIsException, WrongBoardStateException {
-        // 1) full board => resignation
+        // 0) Build current board
+        Mark[][] board = BoardModel.fromMoves(size, boardState);
+
+        // 1) Full board => WrongBoardStateException
         if (boardState.size() >= size * size) {
-            throw new ResignException();
+            throw new WrongBoardStateException();
         }
 
-        // 2) state validation (detects existing winner)
-        validator.validate(size, boardState);
+        // 2) Validate state
+        validator.validate(size, boardState, nextMoveMark);
 
-        Mark[][] pre = BoardModel.fromMoves(size, boardState);
-
-        // 3) Check for immediate win for current player
-        WinDetector ourWinDetector = new WinDetector(adapter);
+        // 3) Immediate win check for us
+        WinDetector ourWinDet = new WinDetector(adapter);
         for (int r = 0; r < size; r++) {
             for (int c = 0; c < size; c++) {
-                if (pre[r][c] == Mark.NULL) {
-                    pre[r][c] = nextMoveMark;
-                    if (ourWinDetector.hasWinner(pre)) {
-                        // We have a winning move - skip threat detection
+                if (board[r][c] == Mark.NULL) {
+                    board[r][c] = nextMoveMark;
+                    if (ourWinDet.hasWinner(board)) {
+                        board[r][c] = Mark.NULL;
                         return new Move(new Position(c, r), nextMoveMark);
                     }
-                    pre[r][c] = Mark.NULL;
+                    board[r][c] = Mark.NULL;
                 }
             }
         }
 
-        // 4) multiple threats from the opponent => resignation
-        Mark opp = (nextMoveMark == Mark.CROSS ? Mark.NOUGHT : Mark.CROSS);
-        WinDetector det = new WinDetector(adapter);
-        int threats = 0;
-        for (int r = 0; r < size; r++) {
-            for (int c = 0; c < size; c++) {
-                if (pre[r][c] == Mark.NULL) {
-                    pre[r][c] = opp;
-                    if (det.hasWinner(pre)) {
-                        threats++;
-                        if (threats > 1) {
-                            throw new ResignException();
-                        }
-                    }
-                    pre[r][c] = Mark.NULL;
-                }
-            }
-        }
-
-        // 5) board construction and move selection
-        Mark[][] board = BoardModel.fromMoves(size, boardState);
+        // 4) Delegate to strategy chain
         return selector.decide(board, nextMoveMark);
     }
 }

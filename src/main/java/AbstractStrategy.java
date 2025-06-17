@@ -31,5 +31,23 @@ public abstract class AbstractStrategy implements Strategy {
         }
     }
 
-    protected abstract Move findMove(Mark[][] board, Mark me);
+    protected abstract Move findMove(Mark[][] board, Mark me) throws ResignException;
+
+    protected int countDirection(Mark[][] board, Mark me, int r, int c, int dr, int dc) {
+        int count = 0;
+        int n = board.length;
+        int rr = r + dr;
+        int cc = c + dc;
+
+        for (int i = 0; i < n; i++) {
+            if (adapter.get(board, rr, cc) == me) {
+                count++;
+                rr += dr;
+                cc += dc;
+            } else {
+                break;
+            }
+        }
+        return count;
+    }
 }

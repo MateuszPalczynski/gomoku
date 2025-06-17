@@ -1,13 +1,19 @@
 import fais.zti.oramus.gomoku.Mark;
 
-/** Nie pozwala na wrap-around; wyjście poza tablicę zwraca Mark.NULL. */
 public class BoundedAdapter implements BoundaryAdapter {
     @Override
     public Mark get(Mark[][] board, int r, int c) {
-        if (r < 0 || r >= board.length || c < 0 || c >= board.length) {
+        if (!isOnBoard(board, r, c)) { // Use our new method
             return Mark.NULL;
         }
         return board[r][c];
+    }
+
+    @Override
+    public boolean isOnBoard(Mark[][] board, int r, int c) {
+        if (board == null) return false;
+        int n = board.length;
+        return r >= 0 && r < n && c >= 0 && c < n;
     }
 
     @Override

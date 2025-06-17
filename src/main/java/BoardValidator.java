@@ -5,38 +5,46 @@ import fais.zti.oramus.gomoku.WrongBoardStateException;
 
 import java.util.Set;
 
-/** Kompozyt walidatorów planszy. */
 public class BoardValidator {
     private final BoundaryAdapter adapter;
+    private final Mark firstMark;
 
-    public BoardValidator(BoundaryAdapter adapter) {
-        this.adapter = adapter;
+    public BoardValidator(BoundaryAdapter adapter, Mark firstMark) {
+        this.adapter   = adapter;
+        this.firstMark = firstMark;
     }
 
-    /**
-     * Waliduje stan planszy.
-     * @throws TheWinnerIsException gdy pięć w rzędzie już istnieje
-     * @throws WrongBoardStateException gdy niepoprawny stan (różnica ruchów >1)
-     */
-    public void validate(int size, Set<Move> boardState)
+    public void validate(int size,
+                         Set<Move> boardState,
+                         Mark nextMoveMark)
             throws TheWinnerIsException, WrongBoardStateException {
+
         Mark[][] board = BoardModel.fromMoves(size, boardState);
         WinDetector detector = new WinDetector(adapter);
-
         if (detector.hasWinner(board)) {
             throw new TheWinnerIsException(detector.getWinner());
         }
 
-        // Fixed: use boardState instead of undefined 'moves'
-        // Fixed: use mark() method of Move objects
-        long crossCount = boardState.stream()
-                .filter(m -> m.mark() == Mark.CROSS)
-                .count();
+        long crossCount  = boardState.stream()
+                .filter(m -> m.mark() == Mark.CROSS).count();
         long noughtCount = boardState.stream()
-                .filter(m -> m.mark() == Mark.NOUGHT)
-                .count();
+                .filter(m -> m.mark() == Mark.NOUGHT).count();
 
-        if (Math.abs(crossCount - noughtCount) > 1) {
+        if (firstMark == Mark.CROSS) {
+            if (!(crossCount == noughtCount || crossCount == noughtCount + 1)) {
+                throw new WrongBoardStateException();
+            }
+        } else {
+            if (!(noughtCount == crossCount || noughtCount == crossCount + 1)) {
+                throw new WrongBoardStateException();
+            }
+        }
+
+        boolean crossesTurn = (crossCount == noughtCount);
+        if (firstMark == Mark.NOUGHT) {
+            crossesTurn = !crossesTurn;
+        }
+        if ( (nextMoveMark == Mark.CROSS) != crossesTurn ) {
             throw new WrongBoardStateException();
         }
     }

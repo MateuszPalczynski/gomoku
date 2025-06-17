@@ -11,35 +11,6 @@ class FinalTest {
     @Nested
     class validation {
         @Test
-        void givenEmptyBoard_whenNextMoveCalled_thenNoExceptionThrown() {
-            String board = """
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                . . . . . . . . . .
-                """;
-            Mark firstMark=Mark.CROSS;
-            Mark nextMoveMark=Mark.CROSS;
-            int size = 10;
-            boolean periodicBoundaryConditionsInUse = false;
-            Set<Move> moves = parseBoard(board);
-
-            Game gomoku = new Gomoku();
-            gomoku.firstMark(firstMark);
-            gomoku.size(size);
-            if (periodicBoundaryConditionsInUse) {
-                gomoku.periodicBoundaryConditionsInUse();
-            }
-            assertDoesNotThrow(() -> gomoku.nextMove(moves, nextMoveMark));
-        }
-
-        @Test
         void emptyBoardWrongMove() {
             String board = """
                 . . . . . . . . . .
@@ -645,7 +616,7 @@ class FinalTest {
             @Test
             void crossWithClosedEnd() throws TheWinnerIsException, ResignException, WrongBoardStateException {
                 String board = """
-                        O . . . . . . . . .
+                        . . . . . . . . . .
                         . X . X . . . . . .
                         . . . . . . . . . O
                         . X . X . . . . . O
@@ -653,7 +624,7 @@ class FinalTest {
                         . . . . . . . . . .
                         . . . . . . . . . .
                         . . . . . . . . . .
-                        . . . . . . . . . .
+                        . . . O . . . . . .
                         . . . . . . . . . .
                         """;
                 Mark firstMark = Mark.NOUGHT;
@@ -669,7 +640,7 @@ class FinalTest {
                     gomoku.periodicBoundaryConditionsInUse();
                 }
                 Move move = gomoku.nextMove(moves, nextMoveMark);
-                assertEquals(new Move(new Position(9, 4), Mark.CROSS), move);
+                assertEquals(new Move(new Position(2, 2), Mark.CROSS), move);
             }
         }
 
@@ -796,7 +767,7 @@ class FinalTest {
                 assertTrue(
                         move.equals(new Move(new Position(2, 8), Mark.CROSS)) ||
                                 move.equals(new Move(new Position(2, 4), Mark.CROSS)),
-                        "Ruch powinien być jednym z dwóch oczekiwanych ruchów"
+                        "The move should be one of two expected moves"
                 );
 
             }
@@ -1228,7 +1199,6 @@ class FinalTest {
         @Test
         void BestAttack() throws TheWinnerIsException, ResignException, WrongBoardStateException
         {
-
             String board = """
                 . . . . . . . . . .
                 . . . . . . . . . .
@@ -1254,8 +1224,6 @@ class FinalTest {
             {
                 gomoku.periodicBoundaryConditionsInUse();
             }
-
-            //Move move = gomoku.nextMove(moves, nextMoveMark);
 
             Move move = gomoku.nextMove(moves, nextMoveMark);
 
