@@ -1,0 +1,1 @@
+The goal of the project was to design and develop an application that can (in some cases) choose the optimal move. In addition, the program will have to determine whether it makes sense to continue the game and whether the found position on the board is in accordance with the rules of the game.
